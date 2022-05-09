@@ -1,1 +1,4 @@
-# paras-capstone-bangkit-2022
+# PARAS
+Pendeteksi awal penyakit kulit
+
+## Capstone Project Bangkit 2022
