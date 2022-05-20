@@ -1,4 +1,4 @@
-const predictHandler = require("./handler");
+const { predictHandler, predictPhotoHandler } = require("./handler");
 
 const routes = [
   {
@@ -8,8 +8,20 @@ const routes = [
   },
   {
     method: "POST",
-    path: "/predict",
+    path: "/predict-photourl",
     handler: predictHandler,
+  },
+  {
+    method: "POST",
+    path: "/predict-photo",
+    options: {
+      payload: {
+        output: "file",
+        allow: "multipart/form-data",
+        multipart: true,
+      },
+      handler: predictPhotoHandler,
+    },
   },
 ];
 

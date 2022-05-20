@@ -1,3 +1,4 @@
+const fs = require("fs");
 const imageToBase64 = require("image-to-base64");
 
 function predictHandler(request, h) {
@@ -31,4 +32,18 @@ function predictHandler(request, h) {
     });
 }
 
-module.exports = predictHandler;
+function predictPhotoHandler(request, h) {
+  const data = request.payload;
+
+  const imageData = fs.readFileSync(data.image.path, "base64");
+  console.log(imageData);
+
+  const response = h.response({
+    status: "success",
+    data: imageData,
+  });
+  response.code(200);
+  return response;
+}
+
+module.exports = { predictHandler, predictPhotoHandler };
