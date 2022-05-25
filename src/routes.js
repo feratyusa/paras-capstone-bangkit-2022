@@ -1,10 +1,15 @@
-const { predictHandler, predictPhotoHandler, createUser } = require("./handler");
+const { predictHandler, predictPhotoHandler, createUser, loginHandler } = require("./handler");
 
 const routes = [
   {
     method: "POST",
     path: "/createUser",
     handler: createUser,
+  },
+  {
+    method: "POST",
+    path: "/login",
+    handler: loginHandler,
   },
   {
     method: "GET",

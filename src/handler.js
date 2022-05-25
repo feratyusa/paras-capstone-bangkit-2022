@@ -1,7 +1,37 @@
 const fs = require("fs");
 const imageToBase64 = require("image-to-base64");
 const bcrypt = require("bcrypt");
-const { db, users } = require("./firestore/firestore");
+const { users } = require("./firestore/firestore");
+
+async function loginHandler(request, h) {
+  const { email, password } = request.payload;
+  const userRef = users.doc(email);
+  const user = await userRef.get();
+  if (!user) {
+    const response = h.response({
+      status: "failed login",
+      message: "email or password is wrong",
+    });
+    response.code(402);
+    return response;
+  }
+  const match = await bcrypt.compare(password, user.password);
+  if (!match) {
+    const response = h.response({
+      status: "failed login",
+      message: "email or password is wrong",
+    });
+    response.code(402);
+    return response;
+  }
+
+  const response = h.response({
+    status: "login success",
+    message: user.email,
+  });
+  response.code(200);
+  return response;
+}
 
 async function createUser(request, h) {
   const { email, password } = request.payload;
@@ -20,8 +50,7 @@ async function createUser(request, h) {
     password: bcrypt.hashSync(password, 10),
   };
 
-  return db
-    .collection("cities")
+  return users
     .doc(email)
     .set(newUser)
     .then(() => {
@@ -79,4 +108,9 @@ function predictPhotoHandler(request, h) {
   return response;
 }
 
-module.exports = { createUser, predictHandler, predictPhotoHandler };
+module.exports = {
+  loginHandler,
+  createUser,
+  predictHandler,
+  predictPhotoHandler,
+};
