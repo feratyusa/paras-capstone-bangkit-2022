@@ -3,12 +3,14 @@ const imageToBase64 = require("image-to-base64");
 const bcrypt = require("bcrypt");
 const { db, users } = require("./firestore/firestore");
 
-function createUser(request, h) {
+async function createUser(request, h) {
   const { email, password } = request.payload;
-  if (users.find(email)) {
+  const userRef = users.doc(email);
+  const user = await userRef.get();
+  if (!user) {
     const response = h.response({
-      status: "failed to create user",
-      message: "Email already exist",
+      status: "failed creating user",
+      message: "email already exists",
     });
     response.code(402);
     return response;
