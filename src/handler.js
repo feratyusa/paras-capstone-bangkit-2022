@@ -11,16 +11,20 @@ async function loginHandler(request, h) {
     const response = h.response({
       status: "Failed login",
       message: "Email or Password is wrong",
+      dev: "Email doesn't exist",
+      em: email,
     });
     response.code(409);
     return response;
   }
 
-  const match = await bcrypt.compare(password, user.password);
+  const match = bcrypt.compareSync(password, user.password);
   if (!match) {
     const response = h.response({
       status: "Failed login",
       message: "Email or Password is wrong",
+      dev: "Password is wrong",
+      pass: user.password,
     });
     response.code(409);
     return response;
