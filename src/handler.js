@@ -20,7 +20,7 @@ async function loginHandler(request, h) {
 
   try {
     return bcrypt
-      .compare(password, user.password)
+      .compare(password, user.data().password)
       .then((result) => {
         if (!result) {
           const response = h.response({
