@@ -1,14 +1,20 @@
-const {
-  predictHandler,
-  predictPhotoHandler,
-  createUserHandler,
-  loginHandler,
-} = require("./handler");
+const { predictPhotoHandler, createUserHandler, loginHandler } = require("./handler");
 
 const routes = [
   {
     method: "POST",
-    path: "/create-user",
+    path: "/login",
+    options: {
+      payload: {
+        allow: ["multipart/form-data", "application/json"],
+        multipart: true,
+      },
+      handler: loginHandler,
+    },
+  },
+  {
+    method: "POST",
+    path: "/register",
     options: {
       payload: {
         allow: ["multipart/form-data", "application/json"],
@@ -16,16 +22,6 @@ const routes = [
       },
       handler: createUserHandler,
     },
-  },
-  {
-    method: "POST",
-    path: "/login",
-    handler: loginHandler,
-  },
-  {
-    method: "POST",
-    path: "/predict-photourl",
-    handler: predictHandler,
   },
   {
     method: "POST",
