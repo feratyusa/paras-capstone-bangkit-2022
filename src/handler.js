@@ -7,7 +7,7 @@ async function loginHandler(request, h) {
   const { email, password } = request.payload;
   const userRef = users.doc(email);
   const user = await userRef.get();
-  if (!user) {
+  if (!user.exist()) {
     const response = h.response({
       status: "Failed login",
       message: "Email or Password is wrong",
@@ -15,6 +15,7 @@ async function loginHandler(request, h) {
     response.code(409);
     return response;
   }
+
   const match = await bcrypt.compare(password, user.password);
   if (!match) {
     const response = h.response({
@@ -37,7 +38,7 @@ async function createUserHandler(request, h) {
   const { email, password } = request.payload;
   const userRef = users.doc(email);
   const user = await userRef.get();
-  if (user) {
+  if (user.exist()) {
     const response = h.response({
       status: "Failed creating user",
       message: "Email already exists",
@@ -63,7 +64,7 @@ async function createUserHandler(request, h) {
     })
     .catch(() => {
       const response = h.response({
-        status: "user creation failed",
+        status: "User creation failed",
         message: "Error when creating new user on server",
       });
       response.code(500);
