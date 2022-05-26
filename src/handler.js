@@ -66,8 +66,9 @@ function createUserHandler(request, h) {
       response.code(409);
       return response;
     }
+
     const newUser = {
-      password: bcrypt.hash(password, 10),
+      password: bcrypt.hashSync(password, 10),
     };
 
     return users
