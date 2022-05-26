@@ -76,10 +76,23 @@ function createUserHandler(request, h) {
 }
 
 function predictPhotoHandler(request, h) {
-  const data = request.payload;
+  const { image } = request.payload;
 
-  const imageData = fs.readFileSync(data.image.path, "base64");
-  console.log(imageData);
+  const imageHeader = image.headers;
+  if (
+    imageHeader["content-type"] !== "image/jpg" &&
+    imageHeader["content-type"] !== "image/png" &&
+    imageHeader["content-type"] !== "image/jpeg"
+  ) {
+    const response = h.response({
+      status: "Failed",
+      message: "Server can not process file format. Try uploading a JPG, JPEG, or PNG file.",
+    });
+    response.code(406);
+    return response;
+  }
+
+  const imageData = fs.readFileSync(image.path, "base64");
 
   const response = h.response({
     status: "Success",
