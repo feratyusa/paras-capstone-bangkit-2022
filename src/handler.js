@@ -38,42 +38,43 @@ async function loginHandler(request, h) {
   return response;
 }
 
-async function createUserHandler(request, h) {
+function createUserHandler(request, h) {
   const { email, password } = request.payload;
   const userRef = users.doc(email);
-  const user = await userRef.get();
-  if (user.exist) {
-    const response = h.response({
-      status: "Failed creating user",
-      message: "Email already exists",
-    });
-    response.code(409);
-    return response;
-  }
-
-  const newUser = {
-    password: bcrypt.hashSync(password, 10),
-  };
-
-  return users
-    .doc(email)
-    .set(newUser)
-    .then(() => {
+  userRef.get().then((user) => {
+    if (user.exist) {
       const response = h.response({
-        status: "User creation success",
-        message: email,
+        status: "Failed creating user",
+        message: "Email already exists",
       });
-      response.code(201);
+      response.code(409);
       return response;
-    })
-    .catch(() => {
-      const response = h.response({
-        status: "User creation failed",
-        message: "Error when creating new user on server",
+    }
+
+    const newUser = {
+      password: bcrypt.hashSync(password, 10),
+    };
+
+    return users
+      .doc(email)
+      .set(newUser)
+      .then(() => {
+        const response = h.response({
+          status: "User creation success",
+          message: email,
+        });
+        response.code(201);
+        return response;
+      })
+      .catch(() => {
+        const response = h.response({
+          status: "User creation failed",
+          message: "Error when creating new user on server",
+        });
+        response.code(500);
+        return response;
       });
-      response.code(500);
-      return response;
-    });
+  });
 }
 
 function predictHandler(request, h) {

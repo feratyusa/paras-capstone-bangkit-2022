@@ -10,4 +10,4 @@ const USERS = "users";
 const users = db.collection(USERS);
 const histories = db.collection(HISTORIES);
 
-module.exports = { db, users, histories };
+module.exports = { users, histories };
