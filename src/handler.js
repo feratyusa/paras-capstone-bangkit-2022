@@ -42,7 +42,7 @@ function createUserHandler(request, h) {
   const { email, password } = request.payload;
   const userRef = users.doc(email);
   return userRef.get().then((user) => {
-    if (user.exist) {
+    if (user.exists) {
       const response = h.response({
         status: "Failed creating user",
         message: "Email already exists",
