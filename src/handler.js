@@ -19,29 +19,39 @@ async function loginHandler(request, h) {
   }
 
   try {
-    const match = await bcrypt.compare(password, user.password);
-    if (!match) {
-      const response = h.response({
-        status: "Failed login",
-        message: "Email or Password is wrong",
-        dev: "Password is wrong",
-        pass: password,
+    return bcrypt
+      .compare(password, user.password)
+      .then((result) => {
+        if (!result) {
+          const response = h.response({
+            status: "Failed login",
+            message: "Email or Password is wrong",
+            dev: "Password is wrong",
+            pass: password,
+          });
+          response.code(409);
+          return response;
+        }
+
+        const response = h.response({
+          status: "Login success",
+          message: user.email,
+        });
+        response.code(200);
+        return response;
+      })
+      .catch((e) => {
+        h.response({
+          message: e,
+          pass: user.password,
+        });
       });
-      response.code(409);
-      return response;
-    }
   } catch (e) {
     return h.response({
       message: e,
+      hash: user.password,
     });
   }
-
-  const response = h.response({
-    status: "Login success",
-    message: user.email,
-  });
-  response.code(200);
-  return response;
 }
 
 function createUserHandler(request, h) {
