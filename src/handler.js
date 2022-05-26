@@ -41,7 +41,7 @@ async function loginHandler(request, h) {
 function createUserHandler(request, h) {
   const { email, password } = request.payload;
   const userRef = users.doc(email);
-  userRef.get().then((user) => {
+  return userRef.get().then((user) => {
     if (user.exist) {
       const response = h.response({
         status: "Failed creating user",
@@ -50,7 +50,6 @@ function createUserHandler(request, h) {
       response.code(409);
       return response;
     }
-
     const newUser = {
       password: bcrypt.hashSync(password, 10),
     };
