@@ -7,7 +7,7 @@ async function loginHandler(request, h) {
   const { email, password } = request.payload;
   const userRef = users.doc(email);
   const user = await userRef.get();
-  if (!user.exist()) {
+  if (!user.exist) {
     const response = h.response({
       status: "Failed login",
       message: "Email or Password is wrong",
@@ -38,7 +38,7 @@ async function createUserHandler(request, h) {
   const { email, password } = request.payload;
   const userRef = users.doc(email);
   const user = await userRef.get();
-  if (user.exist()) {
+  if (user.exist) {
     const response = h.response({
       status: "Failed creating user",
       message: "Email already exists",
