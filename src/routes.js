@@ -23,11 +23,6 @@ const routes = [
     handler: loginHandler,
   },
   {
-    method: "GET",
-    path: "/predict",
-    handler: () => "Try to use POST method",
-  },
-  {
     method: "POST",
     path: "/predict-photourl",
     handler: predictHandler,
