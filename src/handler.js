@@ -9,40 +9,40 @@ async function loginHandler(request, h) {
   const user = await userRef.get();
   if (!user) {
     const response = h.response({
-      status: "failed login",
-      message: "email or password is wrong",
+      status: "Failed login",
+      message: "Email or Password is wrong",
     });
-    response.code(402);
+    response.code(409);
     return response;
   }
   const match = await bcrypt.compare(password, user.password);
   if (!match) {
     const response = h.response({
-      status: "failed login",
-      message: "email or password is wrong",
+      status: "Failed login",
+      message: "Email or Password is wrong",
     });
-    response.code(402);
+    response.code(409);
     return response;
   }
 
   const response = h.response({
-    status: "login success",
+    status: "Login success",
     message: user.email,
   });
   response.code(200);
   return response;
 }
 
-async function createUser(request, h) {
+async function createUserHandler(request, h) {
   const { email, password } = request.payload;
   const userRef = users.doc(email);
   const user = await userRef.get();
-  if (!user) {
+  if (user) {
     const response = h.response({
-      status: "failed creating user",
-      message: "email already exists",
+      status: "Failed creating user",
+      message: "Email already exists",
     });
-    response.code(402);
+    response.code(409);
     return response;
   }
 
@@ -55,10 +55,18 @@ async function createUser(request, h) {
     .set(newUser)
     .then(() => {
       const response = h.response({
-        status: "user creation success",
+        status: "User creation success",
         message: email,
       });
-      response.code(200);
+      response.code(201);
+      return response;
+    })
+    .catch(() => {
+      const response = h.response({
+        status: "user creation failed",
+        message: "Error when creating new user on server",
+      });
+      response.code(500);
       return response;
     });
 }
@@ -101,7 +109,7 @@ function predictPhotoHandler(request, h) {
   console.log(imageData);
 
   const response = h.response({
-    status: "success",
+    status: "Success",
     data: imageData,
   });
   response.code(200);
@@ -110,7 +118,7 @@ function predictPhotoHandler(request, h) {
 
 module.exports = {
   loginHandler,
-  createUser,
+  createUserHandler,
   predictHandler,
   predictPhotoHandler,
 };
