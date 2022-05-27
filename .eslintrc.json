@@ -14,6 +14,8 @@
     "quotes": "off",
     "implicit-arrow-linebreak": "off",
     "global-require": "off",
-    "operator-linebreak": "off"
+    "operator-linebreak": "off",
+    "class-methods-use-this": "off",
+    "object-curly-newline": "off"
   }
 }

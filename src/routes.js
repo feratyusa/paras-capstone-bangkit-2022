@@ -24,6 +24,11 @@ const routes = [
     },
   },
   {
+    method: "GET",
+    path: "/account?{username}",
+    handler: createUserHandler,
+  },
+  {
     method: "POST",
     path: "/predict-photo",
     options: {

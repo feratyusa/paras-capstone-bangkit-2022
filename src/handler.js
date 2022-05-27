@@ -1,17 +1,17 @@
 const fs = require("fs");
 const bcrypt = require("bcrypt");
-const { users } = require("./firestore/firestore");
+const { usersCollection } = require("./firestore/firestore");
 
 async function loginHandler(request, h) {
-  const { email, password } = request.payload;
-  const userRef = users.doc(email);
+  const { username, password } = request.payload;
+  const userRef = usersCollection.doc(username);
   const user = await userRef.get();
   if (!user.exists) {
     const response = h.response({
       status: "Failed login",
-      message: "Email or Password is wrong",
-      dev: "Email doesn't exist",
-      em: email,
+      message: "Username or Password is wrong",
+      dev: "Username doesn't exist",
+      em: username,
     });
     response.code(409);
     return response;
@@ -30,36 +30,40 @@ async function loginHandler(request, h) {
 
   const response = h.response({
     status: "Login success",
-    message: user.email,
+    message: user.data().username,
   });
   response.code(200);
   return response;
 }
 
 function createUserHandler(request, h) {
-  const { email, password } = request.payload;
-  const userRef = users.doc(email);
+  const { username, password, email, handphone = "", photo = "" } = request.payload;
+  const userRef = usersCollection.doc(username);
   return userRef.get().then((user) => {
     if (user.exists) {
       const response = h.response({
         status: "Failed creating user",
-        message: "Email already exists",
+        message: "Username already exists",
       });
       response.code(409);
       return response;
     }
 
     const newUser = {
+      username,
       password: bcrypt.hashSync(password, 10),
+      email,
+      handphone,
+      photo,
     };
 
-    return users
-      .doc(email)
+    return usersCollection
+      .doc(username)
       .set(newUser)
       .then(() => {
         const response = h.response({
           status: "User creation success",
-          message: email,
+          message: username,
         });
         response.code(201);
         return response;
@@ -73,6 +77,10 @@ function createUserHandler(request, h) {
         return response;
       });
   });
+}
+
+function getUserByUsername(request, h){
+  
 }
 
 function predictPhotoHandler(request, h) {

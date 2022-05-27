@@ -7,7 +7,22 @@ const db = new Firestore({
 const HISTORIES = "histories";
 const USERS = "users";
 
-const users = db.collection(USERS);
-const histories = db.collection(HISTORIES);
+const usersCollection = db.collection(USERS);
+const historiesCollection = db.collection(HISTORIES);
 
-module.exports = { users, histories };
+/**
+ * Users Field
+ * username, password, nama, email, no hp, foto
+ */
+
+/**
+ * History Fields
+ * id, gejala, tanggal
+ */
+
+/**
+ * Product Fields
+ * Nama, Detail, Kategori, Gambar
+ */
+
+module.exports = { usersCollection, historiesCollection };
