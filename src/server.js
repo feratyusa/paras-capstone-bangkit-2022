@@ -1,6 +1,20 @@
 const Hapi = require("@hapi/hapi");
+const bcrypt = require("bcrypt");
 const routes = require("./routes");
-const { validate } = require("./validate");
+const { usersCollection } = require("./firestore/firestore");
+
+const validate = async (request, username, password) => {
+  const userRef = usersCollection.doc(username);
+  const user = await userRef.get();
+  if (!user.exists) {
+    return { credentials: null, isValid: false };
+  }
+
+  const isValid = await bcrypt.compare(password, user.data().password);
+  const credentials = { username: user.data().username };
+
+  return { isValid, credentials };
+};
 
 const init = async () => {
   const server = Hapi.server({

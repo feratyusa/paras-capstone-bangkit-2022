@@ -10,8 +10,8 @@ const routes = [
     method: "POST",
     path: "/login",
     options: {
+      auth: false,
       payload: {
-        auth: false,
         allow: ["multipart/form-data", "application/json"],
         multipart: true,
       },
@@ -22,8 +22,8 @@ const routes = [
     method: "POST",
     path: "/register",
     options: {
+      auth: false,
       payload: {
-        auth: false,
         allow: ["multipart/form-data", "application/json"],
         multipart: true,
       },
