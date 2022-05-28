@@ -1,5 +1,6 @@
 const Hapi = require("@hapi/hapi");
 const routes = require("./routes");
+const { validate } = require("./validate");
 
 const init = async () => {
   const server = Hapi.server({
@@ -11,6 +12,12 @@ const init = async () => {
       },
     },
   });
+
+  await server.register(require("@hapi/basic"));
+
+  server.auth.strategy("simple", "basic", { validate });
+
+  server.auth.default("simple");
 
   server.route(routes);
   await server.start();

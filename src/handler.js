@@ -1,6 +1,6 @@
-const fs = require("fs");
 const bcrypt = require("bcrypt");
 const { usersCollection } = require("./firestore/firestore");
+const runPredict = require("./modelFunction");
 
 async function loginHandler(request, h) {
   const { username, password } = request.payload;
@@ -79,11 +79,26 @@ function createUserHandler(request, h) {
   });
 }
 
-function getUserByUsername(request, h){
-  
+async function getUserByUsername(request, h) {
+  const { username } = request.params;
+
+  const userRef = usersCollection.doc(username);
+  const user = await userRef.get();
+  if (!user.exists) {
+    const response = h.response({
+      status: "Not Found",
+      message: "Username not found",
+    });
+    response.code(404);
+    return response;
+  }
+
+  const response = h.response(user.data());
+  response.code(200);
+  return response;
 }
 
-function predictPhotoHandler(request, h) {
+async function predictPhotoHandler(request, h) {
   const { image } = request.payload;
 
   const imageHeader = image.headers;
@@ -100,12 +115,9 @@ function predictPhotoHandler(request, h) {
     return response;
   }
 
-  const imageData = fs.readFileSync(image.path, "base64");
+  const prediction = await runPredict(image.path);
 
-  const response = h.response({
-    status: "Success",
-    data: imageData,
-  });
+  const response = h.response(prediction);
   response.code(200);
   return response;
 }
@@ -114,4 +126,5 @@ module.exports = {
   loginHandler,
   createUserHandler,
   predictPhotoHandler,
+  getUserByUsername,
 };
