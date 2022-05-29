@@ -1,3 +1,4 @@
+const { escapeHtml } = require("@hapi/hoek");
 const bcrypt = require("bcrypt");
 const fs = require("fs");
 const { uploadFile } = require("./bucket/bucket");
@@ -93,6 +94,33 @@ async function getUserByUsername(request, h) {
   }
 
   const response = h.response(user.data());
+  response.code(200);
+  return response;
+}
+
+async function editUserByUsernameHandler(request, h) {
+  const data = request.payload;
+  const { username } = request.params;
+  const userRef = usersCollection.doc(username);
+  if (data.email) {
+    await userRef.update({ email: data.email });
+  } else if (data.handphone) {
+    await userRef.update({ handphone: data.handphone });
+  } else if (data.photo) {
+    /**
+     * Edit photo profile on storage
+     */
+    const destination = `${username}/${username}-photo-profile.jpg`;
+    await uploadFile(data.photo.path, destination, "profile");
+
+    await userRef.update({ photo: `https://storage.googleapis.com/349708_profile/${destination}` });
+  }
+
+  const user = await userRef.get();
+  const response = h.response({
+    status: "Success",
+    data: user.data(),
+  });
   response.code(200);
   return response;
 }
@@ -215,5 +243,6 @@ module.exports = {
   predictPhotoHandler,
   getUserByUsername,
   getHistoryHandler,
+  editUserByUsernameHandler,
   predictTestPhotoHandler,
 };

@@ -5,6 +5,7 @@ const {
   getUserByUsername,
   getHistoryHandler,
   predictTestPhotoHandler,
+  editUserByUsernameHandler,
 } = require("./handler");
 
 const routes = [
@@ -37,6 +38,18 @@ const routes = [
     method: "GET",
     path: "/account/{username}",
     handler: getUserByUsername,
+  },
+  {
+    method: "POST",
+    path: "/account/{username}/edit",
+    options: {
+      payload: {
+        output: "file",
+        allow: "multipart/form-data",
+        multipart: true,
+      },
+      handler: editUserByUsernameHandler,
+    },
   },
   {
     method: "GET",
