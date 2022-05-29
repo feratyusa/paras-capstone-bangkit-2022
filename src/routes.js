@@ -26,7 +26,7 @@ const routes = [
       auth: false,
       payload: {
         output: "file",
-        allow: ["multipart/form-data", "application/json"],
+        allow: "multipart/form-data",
         multipart: true,
       },
       handler: createUserHandler,
