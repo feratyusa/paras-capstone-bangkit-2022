@@ -117,7 +117,7 @@ async function getHistoryHandler(request, h) {
    * if a user has not make a submission before
    *  */
   const checkHistoryCollection = await historyRef.limit(1).get();
-  if (checkHistoryCollection.length !== null) {
+  if (checkHistoryCollection.length === null) {
     const response = h.response({
       status: "Empty",
       message: "This user doesn't have any history yet",
