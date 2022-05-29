@@ -16,6 +16,7 @@
     "global-require": "off",
     "operator-linebreak": "off",
     "class-methods-use-this": "off",
-    "object-curly-newline": "off"
+    "object-curly-newline": "off",
+    "newline-per-chained-call": "off"
   }
 }

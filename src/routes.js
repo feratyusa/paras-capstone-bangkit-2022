@@ -1,3 +1,4 @@
+const Joi = require("joi");
 const {
   predictPhotoHandler,
   createUserHandler,
@@ -15,6 +16,12 @@ const routes = [
     path: "/login",
     options: {
       auth: false,
+      validate: {
+        payload: Joi.object({
+          username: Joi.string().alphanum().min(4).max(50).required(),
+          password: Joi.string().alphanum().min(8).max(30).required(),
+        }),
+      },
       payload: {
         allow: ["multipart/form-data", "application/json"],
         multipart: true,
@@ -27,6 +34,15 @@ const routes = [
     path: "/register",
     options: {
       auth: false,
+      validate: {
+        payload: Joi.object({
+          username: Joi.string().alphanum().min(4).max(50).required(),
+          password: Joi.string().alphanum().min(8).max(30).required(),
+          handphone: Joi.string().regex(/^[0-9]*$/),
+          email: Joi.string().regex(/[@]{1}/),
+          photo: Joi.any(),
+        }),
+      },
       payload: {
         output: "file",
         allow: "multipart/form-data",
@@ -44,6 +60,14 @@ const routes = [
     method: "POST",
     path: "/account/{username}/edit",
     options: {
+      validate: {
+        payload: Joi.object({
+          password: Joi.string().alphanum().min(8).max(30),
+          email: Joi.string().regex(/[@]{1}/),
+          handphone: Joi.string().regex(/^[0-9]*$/),
+          photo: Joi.any(),
+        }),
+      },
       payload: {
         output: "file",
         allow: "multipart/form-data",
