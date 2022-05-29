@@ -8,13 +8,13 @@
 
 Form Data
 
-| field    | value           |
-| -------- | --------------- |
-| username | prabu           |
-| password | halosayang      |
-| email    | prabu@email.com |
-| phone    | 0812121212      |
-| photo    | (attach a file) |
+| field     | value           |
+| --------- | --------------- |
+| username  | prabu           |
+| password  | halosayang      |
+| email     | prabu@email.com |
+| handphone | 0812121212      |
+| photo     | (attach a file) |
 
 #### Response
 
@@ -29,13 +29,13 @@ Form Data
 
 Form Data
 
-| field    | value           |
-| -------- | --------------- |
-| username | prabu           |
-| password | halosayang      |
-| email    | prabu@email.com |
-| phone    | 0812121212      |
-| photo    | (attach a file) |
+| field     | value           |
+| --------- | --------------- |
+| username  | prabu           |
+| password  | halosayang      |
+| email     | prabu@email.com |
+| handphone | 0812121212      |
+| photo     | (attach a file) |
 
 #### Response
 
