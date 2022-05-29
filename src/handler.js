@@ -1,4 +1,3 @@
-const { escapeHtml } = require("@hapi/hoek");
 const bcrypt = require("bcrypt");
 const fs = require("fs");
 const { uploadFile } = require("./bucket/bucket");
@@ -170,6 +169,28 @@ async function getHistoryHandler(request, h) {
   return response;
 }
 
+async function getHistoryByIdHandler(request, h) {
+  const { username, id } = request.params;
+
+  const historyRef = usersCollection.doc(username).collection("histories").doc(id);
+  const history = await historyRef.get();
+  if (!history.exists) {
+    const response = h.response({
+      status: "Not Found",
+      message: "History you are looking for doesn't exist",
+    });
+    response.code(404);
+    return response;
+  }
+
+  const response = h.response({
+    status: "Success",
+    data: history.data(),
+  });
+  response.code(200);
+  return response;
+}
+
 async function predictPhotoHandler(request, h) {
   const { username, image } = request.payload;
 
@@ -245,4 +266,5 @@ module.exports = {
   getHistoryHandler,
   editUserByUsernameHandler,
   predictTestPhotoHandler,
+  getHistoryByIdHandler,
 };

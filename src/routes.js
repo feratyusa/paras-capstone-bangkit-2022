@@ -6,6 +6,7 @@ const {
   getHistoryHandler,
   predictTestPhotoHandler,
   editUserByUsernameHandler,
+  getHistoryByIdHandler,
 } = require("./handler");
 
 const routes = [
@@ -55,6 +56,11 @@ const routes = [
     method: "GET",
     path: "/history/{username}",
     handler: getHistoryHandler,
+  },
+  {
+    method: "GET",
+    path: "/history/{username}/{id}",
+    handler: getHistoryByIdHandler,
   },
   {
     method: "POST",
