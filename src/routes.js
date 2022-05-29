@@ -24,6 +24,7 @@ const routes = [
     options: {
       auth: false,
       payload: {
+        output: "file",
         allow: ["multipart/form-data", "application/json"],
         multipart: true,
       },
@@ -33,6 +34,11 @@ const routes = [
   {
     method: "GET",
     path: "/account/{username}",
+    handler: getUserByUsername,
+  },
+  {
+    method: "GET",
+    path: "/history/{username}",
     handler: getUserByUsername,
   },
   {

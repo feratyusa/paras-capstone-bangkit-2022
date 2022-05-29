@@ -98,6 +98,47 @@ async function getUserByUsername(request, h) {
   return response;
 }
 
+async function getHistoryHandler(request, h) {
+  const { username } = request.payload;
+
+  const userRef = usersCollection.doc(username);
+  const user = await userRef.get();
+  if (!user.exists) {
+    const response = h.response({
+      status: "Not Found",
+      message: "Username not found",
+    });
+    response.code(404);
+    return response;
+  }
+
+  const historyRef = userRef.collection(HISTORIES);
+  /**
+   * Check if history collection exists on a user or
+   * if a user has not make a submission before
+   *  */
+  const checkHistoryCollection = await historyRef.limit(1).get();
+  if (!checkHistoryCollection.exists) {
+    const response = h.response({
+      status: "Empty",
+      message: "This user doesn't have any history yet",
+    });
+    response.code(200);
+    return response;
+  }
+  // Get all history of a user
+  const snapshotData = [];
+  const snapshot = await historyRef.get();
+  snapshot.forEach((doc) => {
+    snapshotData.push({
+      id: doc.id,
+      symptom: doc.data().symptom,
+      description: doc.data().description,
+      date: doc.data().date,
+    });
+  });
+}
+
 async function predictPhotoHandler(request, h) {
   const { image } = request.payload;
 
@@ -116,6 +157,11 @@ async function predictPhotoHandler(request, h) {
   }
 
   const prediction = await runPredict(image.path);
+
+  /**
+   * Save the prediction history
+   */
+  
 
   const response = h.response(prediction);
   response.code(200);
