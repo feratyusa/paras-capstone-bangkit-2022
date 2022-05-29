@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+const fs = require("fs");
 const { uploadFile } = require("./bucket/bucket");
 const { usersCollection, addHistory } = require("./firestore/firestore");
 const runPredict = require("./modelFunction");
@@ -194,10 +195,25 @@ async function predictPhotoHandler(request, h) {
   return response;
 }
 
+async function predictTestPhotoHandler(request, h) {
+  // Request image payload
+  const { image } = request.payload;
+
+  // Take the local temp path of the image
+  const imagePath = image.path;
+
+  // Do something with the image
+  const imageEncrypt = fs.readFileSync(imagePath, "base64");
+
+  const response = h.response({ imageEncrypt });
+  return h.response(response);
+}
+
 module.exports = {
   loginHandler,
   createUserHandler,
   predictPhotoHandler,
   getUserByUsername,
   getHistoryHandler,
+  predictTestPhotoHandler,
 };
