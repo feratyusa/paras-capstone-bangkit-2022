@@ -120,7 +120,7 @@ async function editUserByUsernameHandler(request, h) {
     status: "Success",
     data: user.data(),
   });
-  response.code(200);
+  response.code(202);
   return response;
 }
 
