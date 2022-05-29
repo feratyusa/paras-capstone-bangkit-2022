@@ -17,8 +17,10 @@ async function runPredict(imagePath) {
   image = tf.image.resizeBilinear(image, imageSize);
   image = image.expandDims();
 
-  const prediction = model.predict(image);
-  console.log(prediction);
+  const prediction = model.predict(image).print();
+  // console.log(prediction[0]);
+  // console.log(prediction.argMax(1).print());
+  // console.log(prediction);
   const facialDisease = label[prediction.argMax(1)];
   console.log(facialDisease);
   return facialDisease;

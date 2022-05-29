@@ -2,13 +2,21 @@ const Firestore = require("@google-cloud/firestore");
 
 const db = new Firestore({
   projectId: "leafy-tractor-349708",
+  keyFilename: "../keys/leafy-tractor-349708-199269b05dcb.json",
 });
 
-const HISTORIES = "histories";
 const USERS = "users";
 
 const usersCollection = db.collection(USERS);
-const historiesCollection = db.collection(HISTORIES);
+
+async function addHistory(username, data) {
+  const historyRef = usersCollection.doc(username).collection("histories").doc();
+  const ID = { id: historyRef.id };
+  const fullData = { ...data, ...ID };
+  await historyRef.set(fullData);
+
+  return fullData;
+}
 
 /**
  * Users Field
@@ -17,7 +25,7 @@ const historiesCollection = db.collection(HISTORIES);
 
 /**
  * History Fields
- * id, gejala, tanggal
+ * id, symptom, description, date
  */
 
 /**
@@ -25,4 +33,4 @@ const historiesCollection = db.collection(HISTORIES);
  * Nama, Detail, Kategori, Gambar
  */
 
-module.exports = { usersCollection, historiesCollection };
+module.exports = { usersCollection, addHistory };

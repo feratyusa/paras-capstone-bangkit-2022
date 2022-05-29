@@ -3,6 +3,7 @@ const {
   createUserHandler,
   loginHandler,
   getUserByUsername,
+  getHistoryHandler,
 } = require("./handler");
 
 const routes = [
@@ -39,7 +40,7 @@ const routes = [
   {
     method: "GET",
     path: "/history/{username}",
-    handler: getUserByUsername,
+    handler: getHistoryHandler,
   },
   {
     method: "POST",

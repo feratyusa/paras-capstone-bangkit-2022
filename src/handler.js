@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
-const { usersCollection } = require("./firestore/firestore");
+const { uploadFile } = require("./bucket/bucket");
+const { usersCollection, addHistory } = require("./firestore/firestore");
 const runPredict = require("./modelFunction");
 
 async function loginHandler(request, h) {
@@ -8,7 +9,7 @@ async function loginHandler(request, h) {
   const user = await userRef.get();
   if (!user.exists) {
     const response = h.response({
-      status: "Failed login",
+      status: "Failed",
       message: "Username or Password is wrong",
       dev: "Username doesn't exist",
       em: username,
@@ -20,7 +21,7 @@ async function loginHandler(request, h) {
   const match = await bcrypt.compare(password, user.data().password);
   if (!match) {
     const response = h.response({
-      status: "Failed login",
+      status: "Failed",
       message: "Email or Password is wrong",
       dev: "Password is wrong",
     });
@@ -29,54 +30,51 @@ async function loginHandler(request, h) {
   }
 
   const response = h.response({
-    status: "Login success",
-    message: user.data().username,
+    status: "Login",
+    data: {
+      username: user.data().username,
+      passEncrypt: user.data().password,
+    },
   });
   response.code(200);
   return response;
 }
 
-function createUserHandler(request, h) {
+async function createUserHandler(request, h) {
   const { username, password, email, handphone = "", photo = "" } = request.payload;
   const userRef = usersCollection.doc(username);
-  return userRef.get().then((user) => {
-    if (user.exists) {
-      const response = h.response({
-        status: "Failed creating user",
-        message: "Username already exists",
-      });
-      response.code(409);
-      return response;
-    }
+  const user = await userRef.get();
+  if (user.exists) {
+    const response = h.response({
+      status: "Failed",
+      message: "Username already exists",
+    });
+    response.code(409);
+    return response;
+  }
 
-    const newUser = {
-      username,
-      password: bcrypt.hashSync(password, 10),
-      email,
-      handphone,
-      photo,
-    };
+  /**
+   * Save profile photo to bucket
+   */
+  const destination = `${username}/${username}-photo-profile.jpg`;
+  await uploadFile(photo.path, destination, "profile");
 
-    return usersCollection
-      .doc(username)
-      .set(newUser)
-      .then(() => {
-        const response = h.response({
-          status: "User creation success",
-          message: username,
-        });
-        response.code(201);
-        return response;
-      })
-      .catch(() => {
-        const response = h.response({
-          status: "User creation failed",
-          message: "Error when creating new user on server",
-        });
-        response.code(500);
-        return response;
-      });
+  const newUser = {
+    username,
+    password: bcrypt.hashSync(password, 10),
+    email,
+    handphone,
+    photo: `https://storage.googleapis.com/349708_profile/${destination}`,
+    historyCount: 0,
+  };
+
+  await usersCollection.doc(username).set(newUser);
+  const response = h.response({
+    status: "Success",
+    data: newUser,
   });
+  response.code(201);
+  return response;
 }
 
 async function getUserByUsername(request, h) {
@@ -99,7 +97,7 @@ async function getUserByUsername(request, h) {
 }
 
 async function getHistoryHandler(request, h) {
-  const { username } = request.payload;
+  const { username } = request.params;
 
   const userRef = usersCollection.doc(username);
   const user = await userRef.get();
@@ -112,13 +110,13 @@ async function getHistoryHandler(request, h) {
     return response;
   }
 
-  const historyRef = userRef.collection(HISTORIES);
+  const historyRef = usersCollection.doc(username).collection("histories");
   /**
    * Check if history collection exists on a user or
    * if a user has not make a submission before
    *  */
   const checkHistoryCollection = await historyRef.limit(1).get();
-  if (!checkHistoryCollection.exists) {
+  if (checkHistoryCollection.length !== null) {
     const response = h.response({
       status: "Empty",
       message: "This user doesn't have any history yet",
@@ -126,6 +124,7 @@ async function getHistoryHandler(request, h) {
     response.code(200);
     return response;
   }
+
   // Get all history of a user
   const snapshotData = [];
   const snapshot = await historyRef.get();
@@ -133,14 +132,17 @@ async function getHistoryHandler(request, h) {
     snapshotData.push({
       id: doc.id,
       symptom: doc.data().symptom,
-      description: doc.data().description,
+      // description: doc.data().description,
       date: doc.data().date,
     });
   });
+  const response = h.response(snapshotData);
+  response.code(200);
+  return response;
 }
 
 async function predictPhotoHandler(request, h) {
-  const { image } = request.payload;
+  const { username, image } = request.payload;
 
   const imageHeader = image.headers;
   if (
@@ -156,14 +158,38 @@ async function predictPhotoHandler(request, h) {
     return response;
   }
 
-  const prediction = await runPredict(image.path);
+  // const prediction = await runPredict(image.path);
+  // console.log(prediction);
 
   /**
-   * Save the prediction history
+   * Save the prediction history image
    */
-  
+  // Get count history of a user
+  const userRef = usersCollection.doc(username);
+  const user = await userRef.get();
+  const count = parseInt(user.data().historyCount, 10) + 1; // Plus one
 
-  const response = h.response(prediction);
+  // Save the image
+  const destination = `${username}/history${count}`;
+  uploadFile(image.path, destination, "history");
+
+  // Update the user history count
+  await userRef.update({ historyCount: count });
+
+  /**
+   * Save the history
+   */
+  const dateObject = new Date();
+  const year = dateObject.getFullYear();
+  const month = `0${dateObject.getMonth() + 1}`.slice(-2);
+  const date = `0${dateObject.getDate() + 1}`.slice(-2);
+  const historyData = {
+    symptom: "null",
+    date: `${year}-${month}-${date}`,
+  };
+  const res = await addHistory(username, historyData);
+
+  const response = h.response(res);
   response.code(200);
   return response;
 }
@@ -173,4 +199,5 @@ module.exports = {
   createUserHandler,
   predictPhotoHandler,
   getUserByUsername,
+  getHistoryHandler,
 };
