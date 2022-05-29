@@ -1,9 +1,16 @@
 const Firestore = require("@google-cloud/firestore");
 
-const db = new Firestore({
-  projectId: "leafy-tractor-349708",
-  keyFilename: "../keys/leafy-tractor-349708-199269b05dcb.json",
-});
+let db = "";
+if (process.env.NODE_ENV !== "production") {
+  db = new Firestore({
+    projectId: "leafy-tractor-349708",
+    keyFilename: "../keys/leafy-tractor-349708-199269b05dcb.json",
+  });
+} else {
+  db = new Firestore({
+    projectId: "leafy-tractor-349708",
+  });
+}
 
 const USERS = "users";
 
