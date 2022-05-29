@@ -59,13 +59,41 @@ Only need authorization fill username with any username
 - 200: The response will return all the corresponding user data
 - 404: Username not found
 
+## /account/{username}/edit
+
+### POST
+
+#### Input
+
+Form Data, takes only one input. Just email or handphone or photo
+
+| field | value           |
+| ----- | --------------- |
+| email | prabu@email.com |
+
+or
+
+| field     | value       |
+| --------- | ----------- |
+| handphone | 08123456789 |
+
+or
+
+| field | value         |
+| ----- | ------------- |
+| photo | (attach file) |
+
+#### Response
+
+- 200: The response will return the corresponding user data
+
 ## /history/{username}
 
 ### GET
 
 #### Input
 
-Only need authorization, fill username with any username
+Only need authorization, fill `username` with any username
 
 ```
 /history/prabu
@@ -75,6 +103,23 @@ Only need authorization, fill username with any username
 
 - 200: The response will return all the corresponding user histories image prediction OR an empty history.
 - 404: Username not found
+
+## /history/{username}/{id}
+
+### GET
+
+#### Input
+
+Only need authorization, fill `username` with username and `id` with history id
+
+```
+    /history/prabu/aBcDeFgHiJkalmnOpqrST (history id has 20 characters)
+```
+
+#### Response
+
+- 200: The response will return the corresponding user's history data with corresponding id
+- 404: Cannot find user's history data
 
 ## /predict-photo
 
