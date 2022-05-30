@@ -40,11 +40,11 @@ const routes = [
           handphone: Joi.string()
             .regex(/^[0-9]*$/)
             .allow("")
-            .optional(),
+            .default(null),
           email: Joi.string()
             .regex(/[@]{1}/)
             .required(),
-          photo: Joi.any().allow("").optional(),
+          photo: Joi.any().allow("").optional().default(null),
         }),
       },
       payload: {

@@ -29,19 +29,18 @@ async function loginHandler(request, h) {
     return response;
   }
 
+  const credentials = Buffer.from(`${username}:${password}`).toString("base64");
+
   const response = h.response({
-    status: "Login",
-    data: {
-      username: user.data().username,
-      passEncrypt: user.data().password,
-    },
+    status: "Success",
+    credentials,
   });
   response.code(200);
   return response;
 }
 
 async function createUserHandler(request, h) {
-  const { username, password, email, handphone = "", photo = "" } = request.payload;
+  const { username, password, email, handphone, photo } = request.payload;
   const userRef = usersCollection.doc(username);
   const user = await userRef.get();
   if (user.exists) {
@@ -58,7 +57,7 @@ async function createUserHandler(request, h) {
     /**
      * Save profile photo to bucket
      */
-    const destination = `${username}/${username}-photo-profile.jpg`;
+    destination = `${username}/${username}-photo-profile.jpg`;
     await uploadFile(photo.path, destination, "profile");
   }
 
@@ -72,9 +71,10 @@ async function createUserHandler(request, h) {
   };
 
   await usersCollection.doc(username).set(newUser);
+  const credentials = Buffer.from(`${username}:${password}`).toString("base64");
   const response = h.response({
     status: "Success",
-    data: newUser,
+    credentials,
   });
   response.code(201);
   return response;
