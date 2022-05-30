@@ -257,20 +257,6 @@ async function predictPhotoHandler(request, h) {
   return response;
 }
 
-async function predictTestPhotoHandler(request, h) {
-  // Request image payload
-  const { image } = request.payload;
-
-  // Take the local temp path of the image
-  const imagePath = image.path;
-
-  // Do something with the image
-  const imageEncrypt = await runPredict(imagePath);
-
-  const response = h.response({ imageEncrypt });
-  return h.response(response);
-}
-
 module.exports = {
   loginHandler,
   createUserHandler,
@@ -278,6 +264,5 @@ module.exports = {
   getUserByUsername,
   getHistoryHandler,
   editUserByUsernameHandler,
-  predictTestPhotoHandler,
   getHistoryByIdHandler,
 };

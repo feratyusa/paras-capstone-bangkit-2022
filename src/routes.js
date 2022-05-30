@@ -5,7 +5,6 @@ const {
   loginHandler,
   getUserByUsername,
   getHistoryHandler,
-  predictTestPhotoHandler,
   editUserByUsernameHandler,
   getHistoryByIdHandler,
 } = require("./handler");
@@ -96,19 +95,6 @@ const routes = [
         multipart: true,
       },
       handler: predictPhotoHandler,
-    },
-  },
-  {
-    method: "POST",
-    path: "/test-predict-photo",
-    options: {
-      auth: false,
-      payload: {
-        output: "file",
-        allow: "multipart/form-data",
-        multipart: true,
-      },
-      handler: predictTestPhotoHandler,
     },
   },
 ];
