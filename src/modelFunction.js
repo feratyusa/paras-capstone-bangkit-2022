@@ -4,7 +4,8 @@ const tf = require("@tensorflow/tfjs");
 const tfNode = require("@tensorflow/tfjs-node");
 
 async function runPredict(imagePath) {
-  const MODEL_URL = "https://storage.googleapis.com/paras-model/model/model.json";
+  const MODEL_URL =
+    "https://storage.googleapis.com/paras-model/model/model.json";
 
   const model = await tf.loadGraphModel(MODEL_URL);
 
@@ -17,12 +18,10 @@ async function runPredict(imagePath) {
   image = tf.image.resizeBilinear(image, imageSize);
   image = image.expandDims();
 
-  const prediction = model.predict(image).print();
-  // console.log(prediction[0]);
-  // console.log(prediction.argMax(1).print());
-  // console.log(prediction);
-  const facialDisease = label[prediction.argMax(1)];
-  console.log(facialDisease);
+  const prediction = model.predict(image);
+  const index = prediction.argMax(1).arraySync()[0];
+  const facialDisease = label[index];
+
   return facialDisease;
 }
 
