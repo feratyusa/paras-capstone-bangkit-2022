@@ -38,7 +38,9 @@ const routes = [
           username: Joi.string().alphanum().min(4).max(50).required(),
           password: Joi.string().alphanum().min(8).max(30).required(),
           handphone: Joi.string().regex(/^[0-9]*$/),
-          email: Joi.string().regex(/[@]{1}/),
+          email: Joi.string()
+            .regex(/[@]{1}/)
+            .required(),
           photo: Joi.any(),
         }),
       },
