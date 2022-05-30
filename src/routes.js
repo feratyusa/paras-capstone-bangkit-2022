@@ -37,11 +37,14 @@ const routes = [
         payload: Joi.object({
           username: Joi.string().alphanum().min(4).max(50).required(),
           password: Joi.string().alphanum().min(8).max(30).required(),
-          handphone: Joi.string().regex(/^[0-9]*$/),
+          handphone: Joi.string()
+            .regex(/^[0-9]*$/)
+            .allow("")
+            .optional(),
           email: Joi.string()
             .regex(/[@]{1}/)
             .required(),
-          photo: Joi.any(),
+          photo: Joi.any().allow("").optional(),
         }),
       },
       payload: {
