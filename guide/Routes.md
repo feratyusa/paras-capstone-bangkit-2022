@@ -8,13 +8,10 @@
 
 Form Data
 
-| field     | value           |
-| --------- | --------------- |
-| username  | prabu           |
-| password  | halosayang      |
-| email     | prabu@email.com |
-| handphone | 0812121212      |
-| photo     | (attach a file) |
+| field    | value      |
+| -------- | ---------- |
+| username | prabu      |
+| password | halosayang |
 
 #### Response
 
@@ -29,13 +26,13 @@ Form Data
 
 Form Data
 
-| field     | value           |
-| --------- | --------------- |
-| username  | prabu           |
-| password  | halosayang      |
-| email     | prabu@email.com |
-| handphone | 0812121212      |
-| photo     | (attach a file) |
+| field     | value                                           |
+| --------- | ----------------------------------------------- |
+| username  | prabu (required, min 4, max 50, no spaces)      |
+| password  | halosayang (required, min 8, max 30, no spaces) |
+| email     | prabu@email.com                                 |
+| handphone | 0812121212                                      |
+| photo     | (attach a file)                                 |
 
 #### Response
 
@@ -48,7 +45,7 @@ Form Data
 
 #### Input
 
-Only need authorization fill username with any username
+Only need authorization, fill username with any username
 
 ```
 /account/prabu
@@ -136,4 +133,5 @@ Form Data
 
 #### Response
 
-- 200: Success identifying the image
+- 200: Success identifying the image and return the prediction data (symptom, date, and id)
+- 406: Image format submitted is incorrect (shoudl be JPG, JPEG, or PNG)
