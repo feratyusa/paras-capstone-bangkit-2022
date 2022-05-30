@@ -30,7 +30,7 @@ Form Data
 | --------- | ----------------------------------------------- |
 | username  | prabu (required, min 4, max 50, no spaces)      |
 | password  | halosayang (required, min 8, max 30, no spaces) |
-| email     | prabu@email.com                                 |
+| email     | prabu@email.com (required)                      |
 | handphone | 0812121212                                      |
 | photo     | (attach a file)                                 |
 
