@@ -1,5 +1,4 @@
 const bcrypt = require("bcrypt");
-const fs = require("fs");
 const { uploadFile } = require("./bucket/bucket");
 const { usersCollection, addHistory } = require("./firestore/firestore");
 const runPredict = require("./modelFunction");
@@ -113,6 +112,17 @@ async function editUserByUsernameHandler(request, h) {
     await uploadFile(data.photo.path, destination, "profile");
 
     await userRef.update({ photo: `https://storage.googleapis.com/349708_profile/${destination}` });
+  } else if (data.password) {
+    const passHash = bcrypt.hashSync(data.password);
+
+    await userRef.update({ password: passHash });
+  } else {
+    const response = h.response({
+      status: "Failed",
+      message: "Edit failed because no new data provided",
+    });
+    response.code(400);
+    return response;
   }
 
   const user = await userRef.get();
@@ -208,7 +218,10 @@ async function predictPhotoHandler(request, h) {
     return response;
   }
 
-  // const prediction = await runPredict(image.path);
+  /**
+   * Predict users image
+   */
+  const prediction = await runPredict(image.path);
   // console.log(prediction);
 
   /**
@@ -234,7 +247,7 @@ async function predictPhotoHandler(request, h) {
   const month = `0${dateObject.getMonth() + 1}`.slice(-2);
   const date = `0${dateObject.getDate() + 1}`.slice(-2);
   const historyData = {
-    symptom: "null",
+    symptom: prediction,
     date: `${year}-${month}-${date}`,
   };
   const res = await addHistory(username, historyData);
@@ -252,7 +265,7 @@ async function predictTestPhotoHandler(request, h) {
   const imagePath = image.path;
 
   // Do something with the image
-  const imageEncrypt = fs.readFileSync(imagePath, "base64");
+  const imageEncrypt = await runPredict(imagePath);
 
   const response = h.response({ imageEncrypt });
   return h.response(response);
