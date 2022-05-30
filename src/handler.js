@@ -53,11 +53,14 @@ async function createUserHandler(request, h) {
     return response;
   }
 
-  /**
-   * Save profile photo to bucket
-   */
-  const destination = `${username}/${username}-photo-profile.jpg`;
-  await uploadFile(photo.path, destination, "profile");
+  let destination = "default/default-photo-profile.jpg";
+  if (photo !== null) {
+    /**
+     * Save profile photo to bucket
+     */
+    const destination = `${username}/${username}-photo-profile.jpg`;
+    await uploadFile(photo.path, destination, "profile");
+  }
 
   const newUser = {
     username,
