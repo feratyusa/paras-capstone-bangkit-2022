@@ -15,7 +15,7 @@ Form Data
 
 #### Response
 
-- 200: Success. The response will return user data
+- 200: Success. The response will return user credentials
 - 409: Failed login (Email doesn't exist or password is wrong)
 
 ## /register
@@ -36,7 +36,7 @@ Form Data
 
 #### Response
 
-- 201: User creation successful. The response will return user data in JSON
+- 201: User creation successful. The response will return user credentials
 - 409: Email already exist on server
 
 ## /account/{username}
