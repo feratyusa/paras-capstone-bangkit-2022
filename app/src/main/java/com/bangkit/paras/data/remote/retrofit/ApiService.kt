@@ -1,5 +1,6 @@
 package com.bangkit.paras.data.remote.retrofit
 
+import com.bangkit.paras.data.remote.response.ProfileResponse
 import com.bangkit.paras.data.remote.response.ScanResponse
 import com.bangkit.paras.data.remote.response.UserResponse
 import okhttp3.MultipartBody
@@ -27,4 +28,10 @@ interface ApiService {
         @Part("email") email: RequestBody,
         @Part("password") password: RequestBody
     ) : UserResponse
+
+    @GET("account/{id}")
+    suspend fun getProfile(
+        @Header("Authorization")auth:String,
+        @Path("id")username: String
+    ) :ProfileResponse
 }

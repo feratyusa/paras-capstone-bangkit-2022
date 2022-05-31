@@ -2,17 +2,28 @@ package com.bangkit.paras.ui.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.datastore.preferences.preferencesDataStore
+import androidx.datastore.preferences.preferencesDataStoreFile
+import androidx.lifecycle.asLiveData
 import com.bangkit.paras.MainActivity
 import com.bangkit.paras.R
 import com.bangkit.paras.data.Result
 import com.bangkit.paras.databinding.ActivityLoginBinding
+import com.bangkit.paras.di.DataStoreManager
 import com.bangkit.paras.ui.ViewModelFactory
 import com.bangkit.paras.ui.register.RegisterActivity
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
+import javax.inject.Inject
+import kotlin.math.log
 
-
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding :ActivityLoginBinding
@@ -21,12 +32,24 @@ class LoginActivity : AppCompatActivity() {
         factory
     }
 
+    @Inject
+    lateinit var dataStoreManager:DataStoreManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         supportActionBar?.hide()
+
+        runBlocking {
+            val user = dataStoreManager.getUser().first()
+            if (!user.authorization.isNullOrEmpty()){
+                val myIntent = Intent(this@LoginActivity, MainActivity::class.java)
+                this@LoginActivity.startActivity(myIntent)
+            }
+        }
+
 
         binding.textViewRegister.setOnClickListener{
             val myIntent = Intent(this@LoginActivity, RegisterActivity::class.java)
@@ -51,8 +74,11 @@ class LoginActivity : AppCompatActivity() {
 
                                 }
                                 is Result.Success -> {
-                                    val myIntent = Intent(this@LoginActivity, MainActivity::class.java)
-                                    this@LoginActivity.startActivity(myIntent)
+                                    runBlocking {
+                                        dataStoreManager.setUser(result.data.credentials)
+                                        val myIntent = Intent(this@LoginActivity, MainActivity::class.java)
+                                        this@LoginActivity.startActivity(myIntent)
+                                    }
                                 }
                                 is Result.Error -> {
                                     Toast.makeText(this, result.error, Toast.LENGTH_SHORT)

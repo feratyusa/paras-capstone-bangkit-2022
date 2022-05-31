@@ -3,6 +3,8 @@ package com.bangkit.paras.data
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
+import com.bangkit.paras.data.remote.response.Credentials
+import com.bangkit.paras.data.remote.response.ProfileResponse
 import com.bangkit.paras.data.remote.response.ScanResponse
 import com.bangkit.paras.data.remote.response.UserResponse
 import com.bangkit.paras.data.remote.retrofit.ApiConfig
@@ -50,8 +52,16 @@ class Repository(
             emit(Result.Success(service))
 
         } catch (e: Exception) {
+            if (e.message.toString()=="HTTP 409 "){
+                emit(Result.Error("Username doesn't exist or password is wrong"))
+            }
+            else if (e.message.toString()=="HTTP 400 "){
+                emit(Result.Error("Bad Request"))
+            }
+            else{
+                emit(Result.Error("Something went wrong"))
+            }
             Log.d("Repository", "login: ${e.message.toString()} ")
-            emit(Result.Error(e.message.toString()))
         }
     }
 
@@ -66,8 +76,38 @@ class Repository(
             emit(Result.Success(service))
 
         } catch (e: Exception) {
+            if (e.message.toString()=="HTTP 409 "){
+                emit(Result.Error("Email already exist"))
+            }
+            else if (e.message.toString()=="HTTP 400 "){
+                emit(Result.Error("Bad Request"))
+            }
+            else{
+                emit(Result.Error("Something went wrong"))
+            }
             Log.d("Repository", "register: ${e.message.toString()} ")
             emit(Result.Error(e.message.toString()))
+        }
+    }
+
+    fun getUserProfile(credentials: Credentials): LiveData<Result<ProfileResponse>> = liveData{
+        emit(Result.Loading)
+        try {
+            val apiService : ApiService = ApiConfig.getApiService()
+            val service = apiService.getProfile(username = credentials.username.toString(),auth = "Basic ${credentials.authorization.toString()}")
+            emit(Result.Success(service))
+
+        } catch (e: Exception) {
+            if (e.message.toString()=="HTTP 409 "){
+                emit(Result.Error("Username doesn't exist or password is wrong"))
+            }
+            else if (e.message.toString()=="HTTP 400 "){
+                emit(Result.Error("Bad Request"))
+            }
+            else{
+                emit(Result.Error("Something went wrong"))
+            }
+            Log.d("Repository", "getUserProfile: ${e.message.toString()} ")
         }
     }
 
