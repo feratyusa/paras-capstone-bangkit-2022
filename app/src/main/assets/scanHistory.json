@@ -1,0 +1,16 @@
+[
+  {
+    "id": "1",
+    "title": "Acne",
+    "description": "There’s 97% chance you have acne in your face",
+    "image":"https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F23%2F2021%2F11%2F05%2Ftreat-hormonal-acne-2000.jpg",
+    "date":"13 May 2022 10:00"
+  },
+  {
+    "id": "2",
+    "title": "Normal Face",
+    "description": "There’s 95% chance you don’t have any problem with your face",
+    "image":"https://upload.wikimedia.org/wikipedia/commons/3/33/Mark_Kassen%2C_Tony_C%C3%A1rdenas_and_Chris_Evans_%28cropped%29.jpg",
+    "date":"11 May 2022 9:52"
+  }
+]

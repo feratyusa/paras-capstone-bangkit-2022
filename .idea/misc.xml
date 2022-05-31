@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/drawable/ic_love.xml" value="0.3675" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/font/poppins.xml" value="0.21822916666666667" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/font/poppins_bold.xml" value="0.2171875" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/activity_login.xml" value="0.18802083333333333" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/activity_main.xml" value="0.18802083333333333" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/activity_product_detail.xml" value="0.36666666666666664" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/activity_register.xml" value="0.33" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/activity_scan.xml" value="0.18802083333333333" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/activity_skincare_tips_detail.xml" value="0.3958333333333333" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/bottom_sheet_profile.xml" value="0.35688405797101447" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/bottom_sheet_scan.xml" value="0.35688405797101447" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/fragment_history.xml" value="0.18802083333333333" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/fragment_home.xml" value="0.1890625" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/fragment_not_login.xml" value="0.33" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/fragment_product.xml" value="0.33" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/fragment_profile.xml" value="0.18802083333333333" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/fragment_scan_face.xml" value="0.34054054054054056" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/fragment_skincare_tips.xml" value="0.35688405797101447" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/product_card.xml" value="0.35688405797101447" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/product_category_chip.xml" value="0.35688405797101447" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/product_list_card.xml" value="0.5" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/scan_history_card.xml" value="0.35688405797101447" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/skincare_tips_card.xml" value="0.35688405797101447" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/skincare_tips_detail_card.xml" value="0.365625" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/title_view.xml" value="0.5" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/toolbar.xml" value="0.14" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/toolbar_title.xml" value="0.5686032138442522" />
+        <entry key="..\:/Kampus/bangkit/project/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.196" />
+        <entry key="..\:/Kampus/bangkit/project/app/src/main/res/drawable/ic_home.xml" value="0.196" />
+        <entry key="..\:/Kampus/bangkit/project/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1425" />
+        <entry key="..\:/Kampus/bangkit/project/app/src/main/res/font/poppins.xml" value="0.1" />
+        <entry key="..\:/Kampus/bangkit/project/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Kampus/bangkit/project/app/src/main/res/layout/fragment_history.xml" value="0.18802083333333333" />
+        <entry key="..\:/Kampus/bangkit/project/app/src/main/res/layout/fragment_home.xml" value="0.26979166666666665" />
+        <entry key="..\:/Kampus/bangkit/project/app/src/main/res/layout/fragment_product.xml" value="0.26979166666666665" />
+        <entry key="..\:/Kampus/bangkit/project/app/src/main/res/layout/fragment_profile.xml" value="0.1" />
+        <entry key="..\:/Kampus/bangkit/project/app/src/main/res/layout/fragment_skincare_tips.xml" value="0.36666666666666664" />
+        <entry key="..\:/Kampus/bangkit/project/app/src/main/res/layout/skincare_tips_card.xml" value="0.4046242774566474" />
+        <entry key="..\:/Kampus/bangkit/project/app/src/main/res/menu/bottom_navbar.xml" value="0.36666666666666664" />
+        <entry key="..\:/Kampus/capstone/paras-capstone-bangkit-2022/capstone/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/Kampus/capstone/paras-capstone-bangkit-2022/capstone/app/src/main/res/drawable/ic_home.xml" value="0.2005" />
+        <entry key="..\:/Kampus/capstone/paras-capstone-bangkit-2022/capstone/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2195" />
+        <entry key="..\:/Kampus/capstone/paras-capstone-bangkit-2022/capstone/app/src/main/res/drawable/ic_product.xml" value="0.2005" />
+        <entry key="..\:/Kampus/capstone/paras-capstone-bangkit-2022/capstone/app/src/main/res/drawable/ic_scan.xml" value="0.2005" />
+        <entry key="..\:/Kampus/capstone/paras-capstone-bangkit-2022/capstone/app/src/main/res/drawable/ic_scan_face_background.xml" value="0.2005" />
+        <entry key="..\:/Kampus/capstone/paras-capstone-bangkit-2022/capstone/app/src/main/res/layout-v31/fragment_scan_face.xml" value="0.2875" />
+        <entry key="..\:/Kampus/capstone/paras-capstone-bangkit-2022/capstone/app/src/main/res/layout/activity_login.xml" value="0.33" />
+        <entry key="..\:/Kampus/capstone/paras-capstone-bangkit-2022/capstone/app/src/main/res/layout/activity_main.xml" value="0.3423913043478261" />
+        <entry key="..\:/Kampus/capstone/paras-capstone-bangkit-2022/capstone/app/src/main/res/layout/activity_register.xml" value="0.33" />
+        <entry key="..\:/Kampus/capstone/paras-capstone-bangkit-2022/capstone/app/src/main/res/layout/fragment_history.xml" value="0.17831813576494426" />
+        <entry key="..\:/Kampus/capstone/paras-capstone-bangkit-2022/capstone/app/src/main/res/layout/fragment_home.xml" value="0.21014492753623187" />
+        <entry key="..\:/Kampus/capstone/paras-capstone-bangkit-2022/capstone/app/src/main/res/layout/fragment_profile.xml" value="0.21014492753623187" />
+        <entry key="..\:/Kampus/capstone/paras-capstone-bangkit-2022/capstone/app/src/main/res/layout/fragment_scan_face.xml" value="0.25" />
+        <entry key="..\:/Kampus/capstone/paras-capstone-bangkit-2022/capstone/app/src/main/res/layout/fragment_skincare_tips.xml" value="0.33" />
+        <entry key="..\:/Kampus/capstone/paras-capstone-bangkit-2022/capstone/app/src/main/res/layout/skincare_tips_card.xml" value="0.47651006711409394" />
+        <entry key="..\:/Kampus/capstone/paras-capstone-bangkit-2022/capstone/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2005" />
+        <entry key="..\:/Kampus/capstone/paras-capstone-bangkit-2022/capstone/app/src/main/res/mipmap-anydpi-v26/ic_scan_face.xml" value="0.2005" />
+        <entry key="..\:/Kampus/capstone/paras-capstone-bangkit-2022/capstone/app/src/main/res/mipmap-anydpi-v26/ic_scan_face_round.xml" value="0.2005" />
+        <entry key="..\:/Users/User/Downloads/paras/paras-capstone-bangkit-2022-md/capstone/app/src/main/res/drawable/ic_edit.xml" value="0.16" />
+        <entry key="..\:/Users/User/Downloads/paras/paras-capstone-bangkit-2022-md/capstone/app/src/main/res/drawable/ic_picture.xml" value="0.16" />
+        <entry key="..\:/Users/User/Downloads/paras/paras-capstone-bangkit-2022-md/capstone/app/src/main/res/drawable/ic_scan.xml" value="0.16" />
+        <entry key="..\:/Users/User/Downloads/paras/paras-capstone-bangkit-2022-md/capstone/app/src/main/res/layout/activity_login.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/User/Downloads/paras/paras-capstone-bangkit-2022-md/capstone/app/src/main/res/layout/activity_scan.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/User/Downloads/paras/paras-capstone-bangkit-2022-md/capstone/app/src/main/res/layout/bottom_sheet_profile.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/User/Downloads/paras/paras-capstone-bangkit-2022-md/capstone/app/src/main/res/layout/bottom_sheet_scan.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/User/Downloads/paras/paras-capstone-bangkit-2022-md/capstone/app/src/main/res/layout/fragment_history.xml" value="0.264" />
+        <entry key="..\:/Users/User/Downloads/paras/paras-capstone-bangkit-2022-md/capstone/app/src/main/res/layout/fragment_home.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/User/Downloads/paras/paras-capstone-bangkit-2022-md/capstone/app/src/main/res/layout/fragment_not_login.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/User/Downloads/paras/paras-capstone-bangkit-2022-md/capstone/app/src/main/res/layout/fragment_profile.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/User/Downloads/paras/paras-capstone-bangkit-2022-md/capstone/app/src/main/res/layout/fragment_scan_face.xml" value="0.4405144694533762" />
+        <entry key="..\:/Users/User/Downloads/paras/paras-capstone-bangkit-2022-md/capstone/app/src/main/res/layout/fragment_skincare_tips.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/User/Downloads/paras/paras-capstone-bangkit-2022-md/capstone/app/src/main/res/layout/scan_history_card.xml" value="0.49280575539568344" />
+        <entry key="..\:/Users/User/Downloads/paras/paras-capstone-bangkit-2022-md/capstone/app/src/main/res/layout/skincare_tips_card.xml" value="0.12360688956433637" />
+        <entry key="..\:/Users/User/Downloads/paras2/paras-capstone-bangkit-2022-md/app/src/main/res/layout/activity_login.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/User/Downloads/paras2/paras-capstone-bangkit-2022-md/app/src/main/res/layout/fragment_product.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/User/Downloads/paras3/paras-capstone-bangkit-2022-md/app/src/main/res/layout/activity_register.xml" value="0.12360688956433637" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.21014492753623187" />
+      </ProjectState>
+    </option>
+  </component>
+</project>
