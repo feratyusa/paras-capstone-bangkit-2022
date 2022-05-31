@@ -29,11 +29,14 @@ async function loginHandler(request, h) {
     return response;
   }
 
-  const credentials = Buffer.from(`${username}:${password}`).toString("base64");
+  const authorization = Buffer.from(`${username}:${password}`).toString("base64");
 
   const response = h.response({
     status: "Success",
-    credentials,
+    credentials: {
+      username,
+      authorization,
+    },
   });
   response.code(200);
   return response;
@@ -71,10 +74,13 @@ async function createUserHandler(request, h) {
   };
 
   await usersCollection.doc(username).set(newUser);
-  const credentials = Buffer.from(`${username}:${password}`).toString("base64");
+  const authorization = Buffer.from(`${username}:${password}`).toString("base64");
   const response = h.response({
     status: "Success",
-    credentials,
+    credentials: {
+      username,
+      authorization,
+    },
   });
   response.code(201);
   return response;
