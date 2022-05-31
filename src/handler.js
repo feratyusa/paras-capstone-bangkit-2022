@@ -100,6 +100,15 @@ async function getUserByUsername(request, h) {
     return response;
   }
 
+  if (username !== request.auth.credentials.username) {
+    const response = h.response({
+      status: "Forbidden",
+      message: "You are not allowed to view this page",
+    });
+    response.code(403);
+    return response;
+  }
+
   const response = h.response(user.data());
   response.code(200);
   return response;
@@ -108,6 +117,15 @@ async function getUserByUsername(request, h) {
 async function editUserByUsernameHandler(request, h) {
   const data = request.payload;
   const { username } = request.params;
+
+  if (username !== request.auth.credentials.username) {
+    const response = h.response({
+      status: "Forbidden",
+      message: "You are not allowed to view this page",
+    });
+    response.code(403);
+    return response;
+  }
   const userRef = usersCollection.doc(username);
   if (data.email) {
     await userRef.update({ email: data.email });
@@ -145,6 +163,15 @@ async function editUserByUsernameHandler(request, h) {
 
 async function getHistoryHandler(request, h) {
   const { username } = request.params;
+
+  if (username !== request.auth.credentials.username) {
+    const response = h.response({
+      status: "Forbidden",
+      message: "You are not allowed to view this page",
+    });
+    response.code(403);
+    return response;
+  }
 
   const userRef = usersCollection.doc(username);
   const user = await userRef.get();
@@ -190,6 +217,15 @@ async function getHistoryHandler(request, h) {
 
 async function getHistoryByIdHandler(request, h) {
   const { username, id } = request.params;
+
+  if (username !== request.auth.credentials.username) {
+    const response = h.response({
+      status: "Forbidden",
+      message: "You are not allowed to view this page",
+    });
+    response.code(403);
+    return response;
+  }
 
   const historyRef = usersCollection.doc(username).collection("histories").doc(id);
   const history = await historyRef.get();
