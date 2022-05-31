@@ -12,7 +12,6 @@ async function loginHandler(request, h) {
       status: "Failed",
       message: "Username or Password is wrong",
       dev: "Username doesn't exist",
-      em: username,
     });
     response.code(409);
     return response;
@@ -247,7 +246,7 @@ async function getHistoryByIdHandler(request, h) {
 }
 
 async function predictPhotoHandler(request, h) {
-  const { username, image } = request.payload;
+  const { image } = request.payload;
 
   const imageHeader = image.headers;
   if (
@@ -273,12 +272,12 @@ async function predictPhotoHandler(request, h) {
    * Save the prediction history image
    */
   // Get count history of a user
-  const userRef = usersCollection.doc(username);
+  const userRef = usersCollection.doc(request.auth.credentials.username);
   const user = await userRef.get();
   const count = parseInt(user.data().historyCount, 10) + 1; // Plus one
 
   // Save the image
-  const destination = `${username}/history${count}`;
+  const destination = `${request.auth.credentials.username}/history${count}`;
   uploadFile(image.path, destination, "history");
 
   // Update the user history count
@@ -295,7 +294,7 @@ async function predictPhotoHandler(request, h) {
     symptom: prediction,
     date: `${year}-${month}-${date}`,
   };
-  const res = await addHistory(username, historyData);
+  const res = await addHistory(request.auth.credentials.username, historyData);
 
   const response = h.response(res);
   response.code(200);
