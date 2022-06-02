@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -165,6 +164,15 @@ class ScanActivity : AppCompatActivity() {
 
         }
 
+        val dialog = BottomSheetDialog(this)
+        val sheetBinding = BottomSheetScanBinding.inflate(layoutInflater)
+        dialog.setContentView(sheetBinding.root)
+        sheetBinding.bottomScanTitle.text = "Normal Face"
+        sheetBinding.bottomScanDescription.text = "There’s 97% chance you have acne in your face"
+        sheetBinding.bottomScanBack.setOnClickListener{
+            dialog.dismiss()
+        }
+        dialog.show()
     }
 
     private fun requestPermission(){
