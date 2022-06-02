@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">Paras</string>
+    <string name="home">Home</string>
+    <string name="product">Product</string>
+    <string name="history">History</string>
+    <string name="profile">Profile</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="skincare_tips">Skincare Tips</string>
+    <string name="title">Title</string>
+    <string name="date">Date</string>
+    <string name="desc">Description</string>
+    <string name="detect_face">Detect your face problem</string>
+    <string name="scan_now">Scan Now!</string>
+    <string name="login">Log In</string>
+    <string name="email">E-mail</string>
+    <string name="password">Password</string>
+    <string name="no_account">Don\'t have account? <b>Create Now</b></string>
+    <string name="register">Register</string>
+    <string name="have_account">Already have account?  <b>Login Now</b></string>
+    <string name="username">Username</string>
+    <string name="recommended">Check our recommended product</string>
+    <string name="browse">Browse</string>
+    <string name="account_information">Account information</string>
+    <string name="name">Name</string>
+    <string name="phone">Phone</string>
+    <string name="logout">Logout</string>
+    <string name="please_login">Please login to use this feature</string>
+    <string name="login_now">Login now</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="edit_name">Enter your name</string>
+    <string name="edit_phone">Enter your phone</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="upload">Upload</string>
+    <string name="back">Back</string>
+    <string name="scan_history">Scan history</string>
+    <string name="source">Source</string>
+    <string name="create_account_title">Account created</string>
+    <string name="create_account_body">Please login with your registered account</string>
+    <string name="create_account_button">Continue</string>
+    <string name="enter_email">Enter email</string>
+    <string name="enter_password">Enter password</string>
+    <string name="enter_username">Enter username</string>
+</resources>
