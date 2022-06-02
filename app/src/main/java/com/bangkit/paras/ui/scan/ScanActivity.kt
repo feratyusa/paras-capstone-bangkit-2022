@@ -5,17 +5,18 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.bangkit.paras.data.Result
 import com.bangkit.paras.databinding.ActivityScanBinding
 import com.bangkit.paras.databinding.BottomSheetScanBinding
+import com.bangkit.paras.machinelearning.FaceDetection
 import com.bangkit.paras.ui.ViewModelFactory
 import com.bangkit.paras.utils.CameraUtilities.rotateBitmap
 import com.bangkit.paras.utils.CameraUtilities.uriToFile
@@ -23,7 +24,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import java.io.File
 
 class ScanActivity : AppCompatActivity() {
-    private lateinit var binding:ActivityScanBinding
+    private lateinit var binding: ActivityScanBinding
     private val factory: ViewModelFactory = ViewModelFactory.getInstance(this)
     private val viewModel: ScanViewModel by viewModels {
         factory
@@ -32,27 +33,38 @@ class ScanActivity : AppCompatActivity() {
     private var isCameraPermissionGranted = false
     private var getFile: File? = null
 
+    private val modelPath = "model.tflite"
+    private lateinit var faceDetection: FaceDetection
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityScanBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        faceDetection = FaceDetection(assets, modelPath)
 
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
             title = "Upload Photo"
         }
 
-        permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()){ permissions ->
-            isCameraPermissionGranted = permissions[Manifest.permission.CAMERA] ?: isCameraPermissionGranted
-        }
+        permissionLauncher =
+            registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+                isCameraPermissionGranted =
+                    permissions[Manifest.permission.CAMERA] ?: isCameraPermissionGranted
+            }
         requestPermission()
         binding.btnCamera.setOnClickListener { startCamera() }
         binding.btnGallery.setOnClickListener { startGallery() }
         binding.btnUpload.setOnClickListener {
-            if(getFile!= null)
-                uploadImage()
-            else
-                Toast.makeText(this, "Please insert image using camera or gallery", Toast.LENGTH_SHORT)
+            if (getFile != null) {
+                detectFace()
+            } else
+                Toast.makeText(
+                    this,
+                    "Please insert image using camera or gallery",
+                    Toast.LENGTH_SHORT
+                )
                     .show()
         }
     }
@@ -101,10 +113,10 @@ class ScanActivity : AppCompatActivity() {
         }
     }
 
-    private fun uploadImage(){
-        viewModel.uploadScan(getFile).observe(this){ result ->
-            if(result!=null){
-                when(result){
+    private fun uploadImage() {
+        viewModel.uploadScan(getFile).observe(this) { result ->
+            if (result != null) {
+                when (result) {
                     is Result.Loading -> {
 
                     }
@@ -113,8 +125,9 @@ class ScanActivity : AppCompatActivity() {
                         val sheetBinding = BottomSheetScanBinding.inflate(layoutInflater)
                         dialog.setContentView(sheetBinding.root)
                         sheetBinding.bottomScanTitle.text = "Normal Face"
-                        sheetBinding.bottomScanDescription.text = "There’s 97% chance you have acne in your face"
-                        sheetBinding.bottomScanBack.setOnClickListener{
+                        sheetBinding.bottomScanDescription.text =
+                            "There’s 97% chance you have acne in your face"
+                        sheetBinding.bottomScanBack.setOnClickListener {
                             dialog.dismiss()
                         }
                         dialog.show()
@@ -133,24 +146,24 @@ class ScanActivity : AppCompatActivity() {
         dialog.setContentView(sheetBinding.root)
         sheetBinding.bottomScanTitle.text = "Normal Face"
         sheetBinding.bottomScanDescription.text = "There’s 97% chance you have acne in your face"
-        sheetBinding.bottomScanBack.setOnClickListener{
+        sheetBinding.bottomScanBack.setOnClickListener {
             dialog.dismiss()
         }
         dialog.show()
     }
 
-    private fun requestPermission(){
+    private fun requestPermission() {
         isCameraPermissionGranted = ContextCompat.checkSelfPermission(
             this,
             Manifest.permission.CAMERA
         ) == PackageManager.PERMISSION_GRANTED
 
-        val permissionRequest : MutableList<String> = ArrayList()
+        val permissionRequest: MutableList<String> = ArrayList()
 
-        if(!isCameraPermissionGranted)
+        if (!isCameraPermissionGranted)
             permissionRequest.add(Manifest.permission.CAMERA)
 
-        if(permissionRequest.isNotEmpty())
+        if (permissionRequest.isNotEmpty())
             permissionLauncher.launch(permissionRequest.toTypedArray())
     }
 
@@ -168,4 +181,28 @@ class ScanActivity : AppCompatActivity() {
         const val CAMERA_RESULT = 200
     }
 
+    private fun detectFace() {
+        val filePath = getFile!!.path
+        val bitmap = BitmapFactory.decodeFile(filePath)
+        val result = faceDetection.detectFace(bitmap)
+
+        if (result.confidence > 0.5f) {
+            binding.scanThumbnail.setImageBitmap(result.bitmap)
+            try {
+                val file = com.bangkit.paras.utils.createTempFile(this)
+                val stream = FileOutputStream(file)
+                result.bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+                stream.flush()
+                stream.close()
+
+                getFile = File(file.absolutePath)
+                uploadImage()
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Toast.makeText(this, "Error while processing image", Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            Toast.makeText(this, "Please use an image of a face", Toast.LENGTH_SHORT).show()
+        }
+    }
 }
