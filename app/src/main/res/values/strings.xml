@@ -43,4 +43,8 @@
     <string name="enter_email">Enter email</string>
     <string name="enter_password">Enter password</string>
     <string name="enter_username">Enter username</string>
+    <string name="failed_camera">Failed to launch camera</string>
+    <string name="cameraSnap">Camera Snapshot</string>
+    <string name="cameraFlip">Flip Camera</string>
+    <string name="no_permission">Permission Denied</string>
 </resources>
