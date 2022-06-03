@@ -1,15 +1,18 @@
 package com.bangkit.paras.data.remote.response
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class ScanResponse(
 
-	@field:SerializedName("error")
-	val error: String,
+	@field:SerializedName("date")
+	val date: String? = null,
 
-	@field:SerializedName("message")
-	val message: String,
+	@field:SerializedName("symptom")
+	val symptom: String? = null,
 
-	@field:SerializedName("statusCode")
-	val statusCode: Int
-)
+	@field:SerializedName("id")
+	val id: String? = null
+) : Parcelable

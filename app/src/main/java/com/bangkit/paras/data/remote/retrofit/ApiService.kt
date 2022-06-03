@@ -11,7 +11,8 @@ interface ApiService {
     @Multipart
     @POST("predict-photo")
     suspend fun uploadScan(
-        @Part file: MultipartBody.Part,
+        @Header("Authorization")auth:String,
+        @Part file: MultipartBody.Part
     ): ScanResponse
 
     @Multipart

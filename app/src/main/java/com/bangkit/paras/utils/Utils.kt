@@ -1,15 +1,8 @@
 package com.bangkit.paras.utils
 
-import android.content.ContentResolver
-import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.Matrix
-import android.net.Uri
-import android.os.Environment
 import java.io.*
-import java.text.SimpleDateFormat
-import java.util.*
 
 fun reduceFileImage(file: File): File {
     val bitmap = BitmapFactory.decodeFile(file.path)

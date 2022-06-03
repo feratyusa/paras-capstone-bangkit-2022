@@ -3,9 +3,11 @@ package com.bangkit.paras.ui.scan
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
@@ -17,18 +19,22 @@ import com.bangkit.paras.data.Result
 import com.bangkit.paras.databinding.ActivityScanBinding
 import com.bangkit.paras.databinding.BottomSheetScanBinding
 import com.bangkit.paras.machinelearning.FaceDetection
-import com.bangkit.paras.ui.ViewModelFactory
 import com.bangkit.paras.utils.CameraUtilities.rotateBitmap
 import com.bangkit.paras.utils.CameraUtilities.uriToFile
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import java.io.File
+import com.bangkit.paras.utils.CameraUtilities.createTempFile
+import dagger.hilt.android.AndroidEntryPoint
+import java.io.FileOutputStream
 
+@AndroidEntryPoint
 class ScanActivity : AppCompatActivity() {
     private lateinit var binding: ActivityScanBinding
-    private val factory: ViewModelFactory = ViewModelFactory.getInstance(this)
-    private val viewModel: ScanViewModel by viewModels {
-        factory
-    }
+//    private val factory: ViewModelFactory = ViewModelFactory.getInstance(this)
+//    private val viewModel: ScanViewModel by viewModels {
+//        factory
+//    }
+    private val viewModel: ScanViewModel by viewModels()
     private lateinit var permissionLauncher: ActivityResultLauncher<Array<String>>
     private var isCameraPermissionGranted = false
     private var getFile: File? = null
@@ -121,12 +127,12 @@ class ScanActivity : AppCompatActivity() {
 
                     }
                     is Result.Success -> {
+                        Log.d("success", "uploadImage: ")
                         val dialog = BottomSheetDialog(this)
                         val sheetBinding = BottomSheetScanBinding.inflate(layoutInflater)
                         dialog.setContentView(sheetBinding.root)
-                        sheetBinding.bottomScanTitle.text = "Normal Face"
-                        sheetBinding.bottomScanDescription.text =
-                            "There’s 97% chance you have acne in your face"
+                        sheetBinding.bottomScanTitle.text = result.data.symptom
+                        sheetBinding.bottomScanDescription.text =result.data.date
                         sheetBinding.bottomScanBack.setOnClickListener {
                             dialog.dismiss()
                         }
@@ -141,15 +147,15 @@ class ScanActivity : AppCompatActivity() {
 
         }
 
-        val dialog = BottomSheetDialog(this)
-        val sheetBinding = BottomSheetScanBinding.inflate(layoutInflater)
-        dialog.setContentView(sheetBinding.root)
-        sheetBinding.bottomScanTitle.text = "Normal Face"
-        sheetBinding.bottomScanDescription.text = "There’s 97% chance you have acne in your face"
-        sheetBinding.bottomScanBack.setOnClickListener {
-            dialog.dismiss()
-        }
-        dialog.show()
+//        val dialog = BottomSheetDialog(this)
+//        val sheetBinding = BottomSheetScanBinding.inflate(layoutInflater)
+//        dialog.setContentView(sheetBinding.root)
+//        sheetBinding.bottomScanTitle.text = "Normal Face"
+//        sheetBinding.bottomScanDescription.text = "There’s 97% chance you have acne in your face"
+//        sheetBinding.bottomScanBack.setOnClickListener {
+//            dialog.dismiss()
+//        }
+//        dialog.show()
     }
 
     private fun requestPermission() {
@@ -189,7 +195,7 @@ class ScanActivity : AppCompatActivity() {
         if (result.confidence > 0.5f) {
             binding.scanThumbnail.setImageBitmap(result.bitmap)
             try {
-                val file = com.bangkit.paras.utils.createTempFile(this)
+                val file = createTempFile(this)
                 val stream = FileOutputStream(file)
                 result.bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
                 stream.flush()
