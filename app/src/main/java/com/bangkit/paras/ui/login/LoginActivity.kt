@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import com.bangkit.paras.MainActivity
 import com.bangkit.paras.R
 import com.bangkit.paras.data.Result
@@ -36,6 +37,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.hide()
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         binding.progressBar.visibility = View.INVISIBLE
 
@@ -77,6 +79,7 @@ class LoginActivity : AppCompatActivity() {
                                             Intent(this@LoginActivity, MainActivity::class.java)
                                         this@LoginActivity.startActivity(myIntent)
                                         binding.progressBar.visibility = View.INVISIBLE
+                                        finish()
                                     }
                                 }
                                 is Result.Error -> {
