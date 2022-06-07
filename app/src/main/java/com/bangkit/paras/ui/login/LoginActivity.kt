@@ -46,6 +46,7 @@ class LoginActivity : AppCompatActivity() {
             if (!user.authorization.isNullOrEmpty()) {
                 val myIntent = Intent(this@LoginActivity, MainActivity::class.java)
                 this@LoginActivity.startActivity(myIntent)
+                finish()
             }
         }
 
