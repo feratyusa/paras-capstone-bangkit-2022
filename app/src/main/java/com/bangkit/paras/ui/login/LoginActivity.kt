@@ -2,6 +2,7 @@ package com.bangkit.paras.ui.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -36,6 +37,8 @@ class LoginActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
+        binding.progressBar.visibility = View.INVISIBLE
+
         runBlocking {
             val user = dataStoreManager.getUser().first()
             if (!user.authorization.isNullOrEmpty()) {
@@ -65,7 +68,7 @@ class LoginActivity : AppCompatActivity() {
                         if (result != null) {
                             when (result) {
                                 is Result.Loading -> {
-
+                                    binding.progressBar.visibility = View.VISIBLE
                                 }
                                 is Result.Success -> {
                                     runBlocking {
@@ -73,9 +76,11 @@ class LoginActivity : AppCompatActivity() {
                                         val myIntent =
                                             Intent(this@LoginActivity, MainActivity::class.java)
                                         this@LoginActivity.startActivity(myIntent)
+                                        binding.progressBar.visibility = View.INVISIBLE
                                     }
                                 }
                                 is Result.Error -> {
+                                    binding.progressBar.visibility = View.INVISIBLE
                                     Toast.makeText(this, result.error, Toast.LENGTH_SHORT)
                                         .show()
                                 }

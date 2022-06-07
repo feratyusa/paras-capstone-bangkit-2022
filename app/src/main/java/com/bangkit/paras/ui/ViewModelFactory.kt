@@ -7,7 +7,6 @@ import com.bangkit.paras.data.Repository
 import com.bangkit.paras.di.Injection
 import com.bangkit.paras.ui.login.LoginViewModel
 import com.bangkit.paras.ui.register.RegisterViewModel
-import com.bangkit.paras.ui.scan.ScanViewModel
 
 class ViewModelFactory(private val repository: Repository) :
     ViewModelProvider.NewInstanceFactory() {
@@ -15,9 +14,9 @@ class ViewModelFactory(private val repository: Repository) :
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
-            modelClass.isAssignableFrom(ScanViewModel::class.java) -> {
-                ScanViewModel(repository) as T
-            }
+//            modelClass.isAssignableFrom(ScanViewModel::class.java) -> {
+//                ScanViewModel(repository) as T
+//            }
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
                 LoginViewModel(repository) as T
             }

@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -23,15 +24,14 @@ import com.bangkit.paras.utils.CameraUtilities.createTempFile
 import com.bangkit.paras.utils.CameraUtilities.rotateBitmap
 import com.bangkit.paras.utils.CameraUtilities.uriToFile
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import java.io.FileOutputStream
 
+@AndroidEntryPoint
 class ScanActivity : AppCompatActivity() {
     private lateinit var binding: ActivityScanBinding
-    private val factory: ViewModelFactory = ViewModelFactory.getInstance(this)
-    private val viewModel: ScanViewModel by viewModels {
-        factory
-    }
+    private val viewModel: ScanViewModel by viewModels()
     private lateinit var permissionLauncher: ActivityResultLauncher<Array<String>>
     private var isCameraPermissionGranted = false
     private var getFile: File? = null
@@ -50,6 +50,7 @@ class ScanActivity : AppCompatActivity() {
             setDisplayHomeAsUpEnabled(true)
             title = "Upload Photo"
         }
+        binding.progressBar.visibility = View.INVISIBLE
 
         permissionLauncher =
             registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
@@ -121,23 +122,27 @@ class ScanActivity : AppCompatActivity() {
             if (result != null) {
                 when (result) {
                     is Result.Loading -> {
+                        binding.progressBar.visibility = View.VISIBLE
 
                     }
                     is Result.Success -> {
                         val dialog = BottomSheetDialog(this)
                         val sheetBinding = BottomSheetScanBinding.inflate(layoutInflater)
                         dialog.setContentView(sheetBinding.root)
-                        sheetBinding.bottomScanTitle.text = "Normal Face"
-                        sheetBinding.bottomScanDescription.text =
-                            "There’s 97% chance you have acne in your face"
+                        sheetBinding.bottomScanTitle.text = result.data.symptom
+                        sheetBinding.bottomScanDescription.text =result.data.date
                         sheetBinding.bottomScanBack.setOnClickListener {
                             dialog.dismiss()
                         }
                         dialog.show()
+                        binding.progressBar.visibility = View.INVISIBLE
+
                     }
                     is Result.Error -> {
                         Toast.makeText(this, result.error, Toast.LENGTH_SHORT)
                             .show()
+                        binding.progressBar.visibility = View.INVISIBLE
+
                     }
                 }
             }
@@ -180,7 +185,7 @@ class ScanActivity : AppCompatActivity() {
         val result = faceDetection.detectFace(bitmap)
 
         if (result.confidence > 0.5f) {
-            binding.scanThumbnail.setImageBitmap(result.bitmap)
+//            binding.scanThumbnail.setImageBitmap(result.bitmap)
             try {
                 val file = createTempFile(this)
                 val stream = FileOutputStream(file)
@@ -192,7 +197,7 @@ class ScanActivity : AppCompatActivity() {
                 uploadImage()
             } catch (e: Exception) {
                 e.printStackTrace()
-                Toast.makeText(this, "Error while processing image", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please Use Different Photo", Toast.LENGTH_SHORT).show()
             }
         } else {
             Toast.makeText(this, "Please use an image of a face", Toast.LENGTH_SHORT).show()

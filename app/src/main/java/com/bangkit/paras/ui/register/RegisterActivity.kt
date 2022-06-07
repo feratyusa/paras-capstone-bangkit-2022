@@ -1,6 +1,7 @@
 package com.bangkit.paras.ui.register
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
@@ -25,6 +26,7 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.hide()
+        binding.progressBar.visibility = View.INVISIBLE
 
         binding.textViewLogin.setOnClickListener {
             finish()
@@ -49,7 +51,7 @@ class RegisterActivity : AppCompatActivity() {
                         if (result != null) {
                             when (result) {
                                 is Result.Loading -> {
-
+                                    binding.progressBar.visibility = View.VISIBLE
                                 }
                                 is Result.Success -> {
                                     AlertDialog.Builder(this).apply {
@@ -61,8 +63,11 @@ class RegisterActivity : AppCompatActivity() {
                                         create()
                                         show()
                                     }
+                                    binding.progressBar.visibility = View.INVISIBLE
+
                                 }
                                 is Result.Error -> {
+                                    binding.progressBar.visibility = View.INVISIBLE
                                     Toast.makeText(this, result.error, Toast.LENGTH_SHORT)
                                         .show()
                                 }

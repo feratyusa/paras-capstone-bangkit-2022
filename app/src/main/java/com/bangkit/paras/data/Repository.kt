@@ -18,7 +18,7 @@ class Repository(
     private val apiService: ApiService,
 ) {
 
-    fun uploadScan(getFile: File?): LiveData<Result<ScanResponse>> = liveData {
+    fun uploadScan(getFile: File?,credentials: Credentials): LiveData<Result<ScanResponse>> = liveData{
         emit(Result.Loading)
         try {
             if (getFile != null) {
@@ -30,7 +30,7 @@ class Repository(
                     requestImageFile
                 )
                 val apiService: ApiService = ApiConfig.getApiService()
-                val service = apiService.uploadScan(imageMultipart)
+                val service = apiService.uploadScan("Basic ${credentials.authorization.toString()}",imageMultipart)
                 emit(Result.Success(service))
             }
         } catch (e: Exception) {

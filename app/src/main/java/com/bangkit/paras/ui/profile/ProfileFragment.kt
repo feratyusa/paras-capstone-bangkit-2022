@@ -48,11 +48,14 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.progressBar.visibility = View.INVISIBLE
+
 
         model.getUserProfile().observe({ lifecycle }) { result ->
             if (result != null) {
                 when (result) {
                     is Result.Loading -> {
+                        binding.progressBar.visibility = View.VISIBLE
 
                     }
                     is Result.Success -> {
@@ -66,8 +69,11 @@ class ProfileFragment : Fragment() {
                         currentEmail = result.data.email.toString()
                         currentPhone = result.data.handphone.toString()
                         Log.d("TAG", "onViewCreated: ${result.data}")
+                        binding.progressBar.visibility = View.INVISIBLE
+
                     }
                     is Result.Error -> {
+                        binding.progressBar.visibility = View.INVISIBLE
 
                     }
                 }

@@ -37,6 +37,8 @@ class HistoryFragment : Fragment() {
         rvHistory.layoutManager = LinearLayoutManager(requireActivity())
         rvHistory.adapter = historyAdapter
         getScanHistory(context)
+        binding.progressBar.visibility = View.INVISIBLE
+
     }
 
     private fun getScanHistory(context: Context?) {
@@ -44,6 +46,7 @@ class HistoryFragment : Fragment() {
             if (result != null) {
                 when (result) {
                     is Result.Loading -> {
+                        binding.progressBar.visibility = View.VISIBLE
 
                     }
                     is Result.Success -> {
@@ -66,8 +69,10 @@ class HistoryFragment : Fragment() {
 
                         }
                         Log.d("TAG", "onViewCreated: ${result.data}")
+                        binding.progressBar.visibility = View.INVISIBLE
                     }
                     is Result.Error -> {
+                        binding.progressBar.visibility = View.INVISIBLE
 
                     }
                 }

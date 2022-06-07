@@ -53,8 +53,19 @@ class CameraActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         cameraExecutor.shutdown()
+        super.onDestroy()
+    }
+
+    override fun onPause() {
+        cameraExecutor.shutdown()
+        super.onPause()
+    }
+
+    override fun onResumeFragments()
+    {
+        cameraExecutor.shutdown()
+        super.onResumeFragments()
     }
 
     private fun takePhoto() {
@@ -84,6 +95,7 @@ class CameraActivity : AppCompatActivity() {
                         cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA
                     )
                     setResult(ScanActivity.CAMERA_RESULT, intent)
+                    cameraExecutor.shutdown()
                     finish()
 
                 }
