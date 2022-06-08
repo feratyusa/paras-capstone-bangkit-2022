@@ -86,19 +86,22 @@ class FaceDetection(assetManager: AssetManager, modelPath: String) {
         outputMap[0] = bbox
         outputMap[1] = confidence
         interpreter.runForMultipleInputsOutputs(inputMap, outputMap)
-        return cropImage(bitmap, confidence[0][0], bbox[0])
+        return cropImage(scaledBitmap, confidence[0][0], bbox[0])
     }
 
     private fun cropImage(bitmap: Bitmap, confidence: Float, bbox: FloatArray): Detection {
-        val x = (bbox[0] * inputSize).toInt()
-        val y = (bbox[1] * inputSize).toInt()
-        val width = (bbox[2] * inputSize).toInt() - x
-        val height = (bbox[3] * inputSize).toInt() - y
+        val left = (bbox[0] * inputSize).toInt()
+        val top = (bbox[1] * inputSize).toInt()
+        val right = (bbox[2] * inputSize).toInt()
+        val bottom = (bbox[3] * inputSize).toInt()
+        val width = right - left
+        val height = bottom - top
+
         try {
             val croppedBitmap = Bitmap.createBitmap(
                 bitmap,
-                x,
-                y,
+                left,
+                top,
                 width,
                 height
             )

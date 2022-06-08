@@ -185,7 +185,6 @@ class ScanActivity : AppCompatActivity() {
         val result = faceDetection.detectFace(bitmap)
 
         if (result.confidence > 0.5f) {
-//            binding.scanThumbnail.setImageBitmap(result.bitmap)
             try {
                 val file = createTempFile(this)
                 val stream = FileOutputStream(file)
