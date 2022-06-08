@@ -240,7 +240,7 @@ async function getHistoryHandler(request, h) {
     snapshotData.push({
       id: doc.id,
       symptom: doc.data().symptom,
-      // description: doc.data().description,
+      image: doc.data().image,
       date: doc.data().date,
     });
   });
