@@ -78,6 +78,8 @@ async function createUserHandler(request, h) {
   const { username, password, email, handphone, photo } = request.payload;
   const userRef = usersCollection.doc(username);
   const user = await userRef.get();
+
+  // Check if username exists on database
   if (user.exists) {
     const response = h.response({
       status: "Failed",
@@ -311,9 +313,9 @@ async function predictPhotoHandler(request, h) {
 
   // Save the image
   let extension = ".jpg";
-  if (imageHeader["content-type"] !== "image/jpeg") {
+  if (imageHeader["content-type"] === "image/jpeg") {
     extension = ".jpeg";
-  } else if (imageHeader["content-type"] !== "image/png") {
+  } else if (imageHeader["content-type"] === "image/png") {
     extension = ".png";
   }
   const destination = `${request.auth.credentials.username}/history${count}${extension}`;
@@ -332,6 +334,7 @@ async function predictPhotoHandler(request, h) {
   const historyData = {
     symptom: prediction,
     date: `${year}-${month}-${date}`,
+    image: `https://storage.googleapis.com/349708_history/${destination}`,
   };
   const res = await addHistory(request.auth.credentials.username, historyData);
 
