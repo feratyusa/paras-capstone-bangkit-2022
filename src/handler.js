@@ -41,6 +41,39 @@ async function loginHandler(request, h) {
   return response;
 }
 
+async function loginAsGuestHandler(request, h) {
+  const { date } = request.payload; // YYYY-MM-DD
+
+  const guestRef = usersCollection.doc();
+  const username = `g_${guestRef.id}`;
+  const password = `g_${Math.round(Math.random() * 100000000)}`;
+  const email = `${username}@email.com`;
+  const handphone = "";
+  const destination = "default/default-photo-profile.jpg";
+
+  await guestRef.set({
+    username,
+    password,
+    email,
+    handphone,
+    photo: `https://storage.googleapis.com/349708_profile/${destination}`,
+    date,
+  });
+
+  const authorization = Buffer.from(`${username}:${password}`).toString("base64");
+
+  const response = h.response({
+    status: "Success",
+    credentials: {
+      username,
+      password,
+      authorization,
+    },
+  });
+  response.code(201);
+  return response;
+}
+
 async function createUserHandler(request, h) {
   const { username, password, email, handphone, photo } = request.payload;
   const userRef = usersCollection.doc(username);
@@ -277,7 +310,13 @@ async function predictPhotoHandler(request, h) {
   const count = parseInt(user.data().historyCount, 10) + 1; // Plus one
 
   // Save the image
-  const destination = `${request.auth.credentials.username}/history${count}`;
+  let extension = ".jpg";
+  if (imageHeader["content-type"] !== "image/jpeg") {
+    extension = ".jpeg";
+  } else if (imageHeader["content-type"] !== "image/png") {
+    extension = ".png";
+  }
+  const destination = `${request.auth.credentials.username}/history${count}${extension}`;
   uploadFile(image.path, destination, "history");
 
   // Update the user history count
@@ -309,4 +348,5 @@ module.exports = {
   getHistoryHandler,
   editUserByUsernameHandler,
   getHistoryByIdHandler,
+  loginAsGuestHandler,
 };

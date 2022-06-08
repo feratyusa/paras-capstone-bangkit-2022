@@ -7,6 +7,7 @@ const {
   getHistoryHandler,
   editUserByUsernameHandler,
   getHistoryByIdHandler,
+  loginAsGuestHandler,
 } = require("./handler");
 
 const routes = [
@@ -53,6 +54,24 @@ const routes = [
         multipart: true,
       },
       handler: createUserHandler,
+    },
+  },
+  {
+    method: "POST",
+    path: "/loginAsGuest",
+    options: {
+      validate: {
+        payload: Joi.object({
+          date: Joi.date().default(new Date().toISOString().slice(0, 10)),
+        }),
+      },
+      auth: false,
+      payload: {
+        output: "file",
+        allow: "multipart/form-data",
+        multipart: true,
+      },
+      handler: loginAsGuestHandler,
     },
   },
   {
