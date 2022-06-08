@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/activity_camera.xml" value="0.125" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/activity_login.xml" value="0.18802083333333333" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/activity_main.xml" value="0.18802083333333333" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/activity_product_detail.xml" value="0.18802083333333333" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/activity_register.xml" value="0.18802083333333333" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/activity_scan.xml" value="0.125" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/activity_skincare_tips_detail.xml" value="0.1" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/bottom_sheet_profile.xml" value="0.18802083333333333" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/fragment_history.xml" value="0.18802083333333333" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/fragment_home.xml" value="0.18802083333333333" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/fragment_not_login.xml" value="0.18802083333333333" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/fragment_product.xml" value="0.18802083333333333" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/fragment_profile.xml" value="0.125" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/fragment_scan_face.xml" value="0.18802083333333333" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/fragment_skincare_tips.xml" value="0.18802083333333333" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/product_category_chip.xml" value="0.18802083333333333" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/product_list_card.xml" value="0.18802083333333333" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/scan_history_card.xml" value="0.18802083333333333" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/skincare_tips_card.xml" value="0.18802083333333333" />
+        <entry key="..\:/Kampus/bangkit/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/skincare_tips_detail_card.xml" value="0.18802083333333333" />
+        <entry key="..\:/capstone/paras-capstone-bangkit-2022/app/src/main/res/layout/activity_camera.xml" value="0.33" />
+      </map>
+    </option>
+  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
+</project>
