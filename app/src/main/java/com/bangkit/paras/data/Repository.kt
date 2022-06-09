@@ -76,7 +76,7 @@ class Repository(
 
         } catch (e: Exception) {
             if (e.message.toString() == "HTTP 409 ") {
-                emit(Result.Error("Email already exist"))
+                emit(Result.Error("Username already exist"))
             } else if (e.message.toString() == "HTTP 400 ") {
                 emit(Result.Error("Bad Request"))
             } else {

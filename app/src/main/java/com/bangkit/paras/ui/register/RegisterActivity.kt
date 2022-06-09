@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import com.bangkit.paras.R
 import com.bangkit.paras.data.Result
 import com.bangkit.paras.databinding.ActivityRegisterBinding
@@ -27,6 +28,9 @@ class RegisterActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
         binding.progressBar.visibility = View.INVISIBLE
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
 
         binding.textViewLogin.setOnClickListener {
             finish()

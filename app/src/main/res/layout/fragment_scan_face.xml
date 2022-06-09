@@ -8,10 +8,13 @@
 
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/scanCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:padding="8dp"
         card_view:cardCornerRadius="30dp"
         card_view:layout_constraintBottom_toBottomOf="parent"
@@ -52,12 +55,11 @@
                 android:id="@+id/skincare_tips_thumbnail"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:src="@drawable/scanface"
                 android:adjustViewBounds="true"
+                android:src="@drawable/scanface"
                 card_view:layout_constraintEnd_toEndOf="parent"
                 card_view:layout_constraintStart_toStartOf="parent"
-                card_view:layout_constraintTop_toTopOf="parent"
-                 />
+                card_view:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/imageView"
