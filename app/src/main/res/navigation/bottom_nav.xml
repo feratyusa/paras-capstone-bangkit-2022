@@ -10,11 +10,11 @@
         android:name="com.bangkit.paras.ui.home.HomeFragment"
         android:label="Home"
         tools:layout="@layout/fragment_home" />
-    <fragment
-        android:id="@+id/navigation_product"
-        android:name="com.bangkit.paras.ui.product.ProductFragment"
-        android:label="Product"
-        tools:layout="@layout/fragment_product" />
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_product"-->
+<!--        android:name="com.bangkit.paras.ui.product.ProductFragment"-->
+<!--        android:label="Product"-->
+<!--        tools:layout="@layout/fragment_product" />-->
     <fragment
         android:id="@+id/navigation_history"
         android:name="com.bangkit.paras.ui.history.HistoryFragment"
