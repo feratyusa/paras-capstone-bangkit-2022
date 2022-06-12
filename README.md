@@ -119,7 +119,12 @@ To get a local copy up and running follow these simple example steps. -->
 
 ## Usage
 
-1.
+1. Login or Register first.
+2. Click "Scan Now" button to start scanning your face.
+3. Either choose to upload an image of your face from gallery or take a photo of your face.
+4. Make sure your whole face is visible
+5. Click upload and wait for the result.
+6. On the History page, you can see recent or past scan and see the progress of your face everytime you scan.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
