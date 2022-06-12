@@ -21,7 +21,7 @@ async function loginHandler(request, h) {
   if (!match) {
     const response = h.response({
       status: "Failed",
-      message: "Email or Password is wrong",
+      message: "Username or Password is wrong",
       dev: "Password is wrong",
     });
     response.code(409);
