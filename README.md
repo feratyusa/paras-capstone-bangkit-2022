@@ -75,6 +75,12 @@
 
 Paras helps to track your facial treatment, diagnose your facial skin problem, give advice for a healthy lifestyle, and recommend related beauty products.
 
+<a href="https://github.com/feratyusa/paras-capstone-bangkit-2022/tree/md">Mobile Development</a>
+<br/>
+<a href="https://github.com/feratyusa/paras-capstone-bangkit-2022/tree/cc">Cloud Computing</a>
+<br/>
+<a href="https://github.com/feratyusa/paras-capstone-bangkit-2022/tree/ML">Machine Learning</a>
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ### Built With
