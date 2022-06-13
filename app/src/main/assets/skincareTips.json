@@ -1,0 +1,78 @@
+[
+    {
+        "id": "1",
+        "title": "4 Steps Skincare Routine for Men (And More)",
+        "description": "Men’s most common skin issues include acne, wrinkles, and dark spots. While you may want to tackle and solve these problems, it could be confusing to start. A simple 4-step daily skincare routine could definitely help you out. All steps are easy and straightforward. Remember, it’s never too late to begin. ",
+        "image":"https://api.watsons.co.id/api/v2/wtcid/blog/wp-content/uploads/main-banner.png",
+        "source": "watsons.co.id",
+        "link_source": "https://www.watsons.co.id/blog/en/skincare-tips/basic-skincare-routine-men",
+        "date": "28/23/2000",
+        "tips":[
+            {
+                "no": "1",
+                "tipstitle": "Step 1: Cleanse",
+                "description": "Face cleansing is the fundamental procedure of skincare routine. Use warm water to wash face can open the pores to wash away the dirt. Apply a dime-sized face cleansing foam to your face with circular motions gently. And, rinse well with warm water. Then, splash cold water on your face to refine the pores.",
+                "image": ""
+            },
+            {
+                "no": "2",
+                "tipstitle": "Step 2: Exfoliate",
+                "description": "The next step is exfoliation. 2-3 times per week is ideal. It is a deep clean to remove dead skin cells, dirt in the pores and sebum. It can soften your skin and brighten dull skin tone. It also helps to prevent clogged pores, breakouts and blackheads. Apply a small amount of facial scrub to your face and massage gently for 30 seconds before rinsing.",
+                "image": ""
+            },
+            {
+                "no": "3",
+                "tipstitle": "Step 3: Moisturise",
+                "description": "Moisturising is the most important step for the daily skincare routine. Choose a moisturiser that is suitable for your skin type. Keep your skin hydrated to prevent the formation of wrinkles and excess oil production. You can also use eye cream to soothe fine lines and reduce puffiness surrounding your eyes. ",
+                "image": ""
+            },
+            {
+                "no": "4",
+                "tipstitle": "Step 4: SPF",
+                "description": "How to stay young? The best way of anti-aging is wearing sunscreen every day. Sunscreen is a must-have item to fight against harmful UV rays. 90% pre-mature aging is caused by sun damage. Apply SPF30 or higher sunscreen daily to protect your skin.  ",
+                "image": ""
+            }
+        ]
+    },
+    {
+        "id": "2",
+        "title": "Skin care: 5 tips for healthy skin",
+        "description": "Don't have time for intensive skin care? You can still pamper yourself by acing the basics. Good skin care and healthy lifestyle choices can help delay natural aging and prevent various skin problems. Get started with these five no-nonsense tips.",
+        "image":"https://i.pinimg.com/originals/e5/15/52/e51552885f316daa8f766f6a1ed7a0d9.jpg",
+        "source": "mayoclinic.org",
+        "link_source": "https://www.mayoclinic.org/healthy-lifestyle/adult-health/in-depth/skin-care/art-20048237",
+        "date": "22/01/2022",
+        "tips":[
+            {
+                "no": "1",
+                "tipstitle": "1. Protect yourself from the sun",
+                "description": "One of the most important ways to take care of your skin is to protect it from the sun. A lifetime of sun exposure can cause wrinkles, age spots and other skin problems — as well as increase the risk of skin cancer.",
+                "image": ""
+            },
+            {
+                "no": "2",
+                "tipstitle": "2. Don't smoke",
+                "description": "Smoking makes your skin look older and contributes to wrinkles. Smoking narrows the tiny blood vessels in the outermost layers of skin, which decreases blood flow and makes skin paler. This also depletes the skin of oxygen and nutrients that are important to skin health.",
+                "image": ""
+            },
+            {
+                "no": "3",
+                "tipstitle": "3. Treat your skin gently",
+                "description": "Daily cleansing and shaving can take a toll on your skin",
+                "image": ""
+            },
+            {
+                "no": "4",
+                "tipstitle": "4. Eat a healthy diet",
+                "description": "A healthy diet can help you look and feel your best. Eat plenty of fruits, vegetables, whole grains and lean proteins. The association between diet and acne isn't clear — but some research suggests that a diet rich in fish oil or fish oil supplements and low in unhealthy fats and processed or refined carbohydrates might promote younger looking skin. Drinking plenty of water helps keep your skin hydrated. ",
+                "image": ""
+            },
+            {
+                "no": "5",
+                "tipstitle": "5. Manage stress",
+                "description": "Uncontrolled stress can make your skin more sensitive and trigger acne breakouts and other skin problems. To encourage healthy skin — and a healthy state of mind — take steps to manage your stress. Get enough sleep, set reasonable limits, scale back your to-do list and make time to do the things you enjoy. The results might be more dramatic than you expect.",
+                "image": ""
+            }
+        ]
+    }
+]
