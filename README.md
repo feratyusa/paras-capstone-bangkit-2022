@@ -110,7 +110,7 @@ To get a local copy up and running follow these simple example steps. -->
 
 ### Installation
 
-1. Download the APK
+1. Download the <a href="https://drive.google.com/file/d/1liXU3AbZEmva2xZWszFkdRFFqJonPlqN/view">APK</a>
 2. Install the APK on your android smartphone
 
 <p align="right">(<a href="#top">back to top</a>)</p>
